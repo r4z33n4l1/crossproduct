@@ -40,7 +40,8 @@ public class BoggleGame {
         this.gameStats = new BoggleStats();
     }
 
-    /* 
+
+    /*
      * Provide instructions to the user, so they know how to play the game.
      */
     public void giveInstructions()
@@ -134,6 +135,9 @@ public class BoggleGame {
      * passed by reference from here to many other functions.
      */
     public void playRound(int size, String letters){
+
+
+
         //step 1. initialize the grid
         BoggleGrid grid = new BoggleGrid(size);
         grid.initalizeBoard(letters);
