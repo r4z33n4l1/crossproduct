@@ -1,4 +1,4 @@
-package boggle;
+package boggle.stats;
 
 import java.util.HashSet;
 import java.util.Set;

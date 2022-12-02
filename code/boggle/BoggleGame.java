@@ -1,5 +1,7 @@
 package boggle;
 
+import boggle.stats.BoggleStats;
+
 import java.util.*;
 
 /**
@@ -38,7 +40,8 @@ public class BoggleGame {
         this.gameStats = new BoggleStats();
     }
 
-    /* 
+
+    /*
      * Provide instructions to the user, so they know how to play the game.
      */
     public void giveInstructions()
@@ -132,11 +135,14 @@ public class BoggleGame {
      * passed by reference from here to many other functions.
      */
     public void playRound(int size, String letters){
+
+
+
         //step 1. initialize the grid
         BoggleGrid grid = new BoggleGrid(size);
         grid.initalizeBoard(letters);
         //step 2. initialize the dictionary of legal words
-        Dictionary boggleDict = new Dictionary("wordlist.txt"); //you may have to change the path to the wordlist, depending on where you place it.
+        Dictionary boggleDict = new Dictionary("dictionaries/wordlist.txt"); //you may have to change the path to the wordlist, depending on where you place it.
         //step 3. find all legal words on the board, given the dictionary and grid arrangement.
         Map<String, ArrayList<Position>> allWords = new HashMap<String, ArrayList<Position>>();
         findAllWords(allWords, boggleDict, grid);
