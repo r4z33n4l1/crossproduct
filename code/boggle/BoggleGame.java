@@ -127,6 +127,11 @@ public class BoggleGame {
         this.gameStats.summarizeGame();
         System.out.println("Thanks for playing!");
     }
+    public BoggleGrid getGrid(){
+        BoggleGrid grid = new BoggleGrid(4);
+        grid.initalizeBoard(randomizeLetters(4));
+        return grid;
+    }
 
     /* 
      * Play a round of Boggle.
