@@ -1,4 +1,4 @@
-package dictionaries;
+package themes;
 
 import java.util.*;
 
