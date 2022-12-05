@@ -11,18 +11,24 @@ import java.util.*;
 public class BoggleGame {
 
     /**
+     * Scanner
+     */
+    public Scanner scanner;
+
+    /**
      * Timer
      */ 
     public Timer timer;
+
     /**
      * stores game statistics
      */ 
-    private final BoggleStats gameStats;
+    private BoggleStats gameStats;
 
     /**
      * Game mode
      */
-    private final GameMode gameMode;
+    private GameMode gameMode;
 
     /**
      * dice used to randomize letter assignments for a small grid
@@ -43,29 +49,21 @@ public class BoggleGame {
         PRACTICE,
         SINGLEPLAYER,
         MULTIPLAYER
-
+    }
 
     /**
      * Carina's hint stuff (don't touch)
      */
     int inner_counter = 0;
     String hint = "";
-//    int hint_len = 0;
+    // int hint_len = 0;
     int outer_counter = 0;
 
-    /* 
-     * BoggleGame constructor
-     */
-    public BoggleGame() {
-        this.scanner = new Scanner(System.in);
-        this.gameStats = new BoggleStats();
-
-    }
-
-    /* 
+    /**
      * BoggleGame constructor
      */
     public BoggleGame(GameModes mode) {
+        this.scanner = new Scanner(System.in);
         this.gameStats = BoggleStats.getInstance();
         this.timer = new Timer();
         if (mode == GameModes.PRACTICE) {
@@ -74,8 +72,10 @@ public class BoggleGame {
             this.gameMode = new SingleplayerMode(gameStats);
         } else {
             this.gameMode = new MultiplayerMode(gameStats);
+        }
+    }
 
-    public void playGame(){
+    public void playGame() {
         int boardSize;
         while(true){
             System.out.println("Enter 1 to play on a big (5x5) grid; 2 to play on a small (4x4) one:");
@@ -104,7 +104,7 @@ public class BoggleGame {
             }
 
             if(choiceLetters.equals("1")){
-                playRound(boardSize,randomizeLetters(boardSize));
+                //playRound(boardSize,randomizeLetters(boardSize));
             } else {
                 System.out.println("Input a list of " + boardSize*boardSize + " letters:");
                 choiceLetters = scanner.nextLine();
@@ -113,7 +113,7 @@ public class BoggleGame {
                     System.out.println("Input a list of " + boardSize*boardSize + " letters:");
                     choiceLetters = scanner.nextLine();
                 }
-                playRound(boardSize,choiceLetters.toUpperCase());
+                //playRound(boardSize,choiceLetters.toUpperCase());
             }
 
             //round is over! So, store the statistics, and end the round.
@@ -136,9 +136,10 @@ public class BoggleGame {
 
         }
     }
-    public BoggleGrid getGrid(){
+
+    public BoggleGrid getGrid() {
         BoggleGrid grid = new BoggleGrid(4);
-        grid.initalizeBoard(randomizeLetters(4));
+        grid.initializeBoard(randomizeLetters(4));
         return grid;
     }
 
@@ -160,17 +161,17 @@ public class BoggleGame {
         return this.gameMode.addWord(s);
 
         //step 1. initialize the grid
-        BoggleGrid grid = new BoggleGrid(size);
-        grid.initializeBoard(letters);
+        //BoggleGrid grid = new BoggleGrid(size);
+        //grid.initializeBoard(letters);
         //step 2. initialize the dictionary of legal words
-        Dictionary boggleDict = new Dictionary("dictionaries/wordlist.txt"); //you may have to change the path to the wordlist, depending on where you place it.
+        //Dictionary boggleDict = new Dictionary("dictionaries/wordlist.txt"); //you may have to change the path to the wordlist, depending on where you place it.
         //step 3. find all legal words on the board, given the dictionary and grid arrangement.
-        Map<String, ArrayList<Position>> allWords = new HashMap<String, ArrayList<Position>>();
-        findAllWords(allWords, boggleDict, grid);
+        //Map<String, ArrayList<Position>> allWords = new HashMap<String, ArrayList<Position>>();
+        //findAllWords(allWords, boggleDict, grid);
         //step 4. allow the user to try to find some words on the grid
-        humanMove(grid, allWords);
+        //humanMove(grid, allWords);
         //step 5. allow the computer to identify remaining words
-        computerMove(allWords);
+        // computerMove(allWords);
 
     }
 
@@ -202,7 +203,7 @@ public class BoggleGame {
     }
 
 
-    /* 
+    /*
      * This should be a recursive function that finds all valid words on the boggle board.
      * Every word should be valid (i.e. in the boggleDict) and of length 4 or more.
      * Words that are found should be entered into the allWords HashMap.  This HashMap
@@ -287,15 +288,13 @@ public class BoggleGame {
         visited[i][j] = false;
     }
 
-}
-
     /*
      * Gets words from the user.  As words are input, check to see that they are valid.
      * If yes, add the word to the player's word list (in boggleStats) and increment
      * the player's score (in boggleStats).
      * End the turn once the user hits return (with no word).
      *
-     * @param board The boggle board
+     * @param board - The boggle board
      * @param allWords A mutable list of all legal words that can be found, given the boggleGrid grid letters
      */
     private void humanMove(BoggleGrid board, Map<String,ArrayList<Position>> allWords){
@@ -313,12 +312,12 @@ public class BoggleGame {
                 hint_generator();
                 System.out.println(this.hint);
             }
-            if(allWords.containsKey(word) && gameStats.getPlayerWords().contains(word)){
+            if(allWords.containsKey(word) && gameStats.getPlayerWords(BoggleStats.Player.Player1).contains(word)){
                 System.out.println("Word already in player list");
             }
-            if(allWords.containsKey(word) && !gameStats.getPlayerWords().contains(word)){
+            if(allWords.containsKey(word) && !gameStats.getPlayerWords(BoggleStats.Player.Player1).contains(word)){
                 System.out.println("Word added");
-                gameStats.addWord(word, BoggleStats.Player.Human);
+                gameStats.addWord(word, BoggleStats.Player.Player1);
             }
             else{
                 System.out.println("Not a valid word. Please try again");
@@ -337,7 +336,7 @@ public class BoggleGame {
     }
 
 
-    /* 
+    /*
      * Gets words from the computer.  The computer should find words that are
      * both valid and not in the player's word list.  For each word that the computer
      * finds, update the computer's word list and increment the
@@ -345,14 +344,14 @@ public class BoggleGame {
      *
      * @param allWords A mutable list of all legal words that can be found, given the boggleGrid grid letters
      */
-    private void computerMove(Map<String,ArrayList<Position>> all_words){
-        System.out.println("Now, the computer will find words!");
-        for(String word: all_words.keySet()){
-            if(!gameStats.getPlayerWords().contains(word)){
-                gameStats.addWord(word, BoggleStats.Player.Computer);
-            }
-        }
-    }
+//    private void computerMove(Map<String,ArrayList<Position>> all_words){
+//        System.out.println("Now, the computer will find words!");
+//        for(String word: all_words.keySet()){
+//            if(!gameStats.getPlayerWords().contains(word)){
+//                gameStats.addWord(word, BoggleStats.Player.Computer);
+//            }
+//        }
+//    }
 
 
 
@@ -365,9 +364,9 @@ public class BoggleGame {
         /// Different modes? How to differentiate which player ran out of hints. confusion
         /// Does it reset every new game -> (outer loop doesn't reset if u keep playing again rn)
         /// Atm the algorithm is global cause both players are using the same screen: need to decide on hint limit per player or global game
-        
+
         inner_counter ++;
-        
+
         Set<String> words_not_found = gameStats.getWordsNotFound();
         ArrayList<String> copy_words_not_found = new ArrayList<>(words_not_found);
 
@@ -421,7 +420,7 @@ public class BoggleGame {
 
 //        for (String word: allWords.keySet()){
 //            System.out.println(word);}
-        
+
     }
 
 
@@ -429,11 +428,11 @@ public class BoggleGame {
      * Helper for hints
      */
     private String hint_randomizer(ArrayList<String> copy_words_not_found) {
-//        Set<String> words_not_found = gameStats.getWordsNotFound();
-//        ArrayList<String> copy_words_not_found = new ArrayList<String>(words_not_found);
+        // Set<String> words_not_found = gameStats.getWordsNotFound();
+        // ArrayList<String> copy_words_not_found = new ArrayList<String>(words_not_found);
         Random rand = new Random();
         return copy_words_not_found.get(rand.nextInt(copy_words_not_found.size()));}
-        
+
     }
 
 

@@ -15,7 +15,8 @@ public class BoggleStats {
      */
     private static BoggleStats instance = null;
 
-     * set of words the player finds in a given round 
+    /**
+     *  set of words the player finds in a given round 
      */  
     private Set<String> playerWords = new HashSet<String>();  
     /**
@@ -80,16 +81,16 @@ public class BoggleStats {
         this.resetStats();
 
 
-        this.round = 0;
-        this.cScoreTotal = 0;
-        this.pScoreTotal = 0;
-        this.playerWords = new HashSet<String>();
-        this.computerWords = new HashSet<String>();
-        this.wordsnotfoundyet = new HashSet<String>();
-        this.pAverageWords = 0;
-        this.cAverageWords = 0;
-        this.cScore = 0;
-        this.pScore = 0;
+//        this.round = 0;
+//        this.cScoreTotal = 0;
+//        this.pScoreTotal = 0;
+//        this.playerWords = new HashSet<String>();
+//        this.computerWords = new HashSet<String>();
+//        this.wordsnotfoundyet = new HashSet<String>();
+//        this.pAverageWords = 0;
+//        this.cAverageWords = 0;
+//        this.cScore = 0;
+//        this.pScore = 0;
 
     }
 
@@ -152,18 +153,18 @@ public class BoggleStats {
      * reset the current scores for each player to zero.
      * Finally, increment the current round number by 1.
      */
-    public void endRound() {
-        pAverageWords = (pAverageWords + ((playerWords.size()-pAverageWords)/(round + 1)));
-        cAverageWords = (cAverageWords + ((computerWords.size()-cAverageWords)/(round + 1)));
-        playerWords.clear();
-        computerWords.clear();
-        wordsnotfoundyet.clear();
-        cScoreTotal = cScoreTotal + cScore;
-        pScoreTotal = pScoreTotal + pScore;
-        cScore = 0;
-        pScore = 0;
-        round = round + 1;
-    }
+//    public void endRound() {
+//        pAverageWords = (pAverageWords + ((playerWords.size()-pAverageWords)/(round + 1)));
+//        cAverageWords = (cAverageWords + ((computerWords.size()-cAverageWords)/(round + 1)));
+//        playerWords.clear();
+//        computerWords.clear();
+//        wordsnotfoundyet.clear();
+//        cScoreTotal = cScoreTotal + cScore;
+//        pScoreTotal = pScoreTotal + pScore;
+//        cScore = 0;
+//        pScore = 0;
+//        round = round + 1;
+//    }
 
     /* 
      * Summarize one round of boggle.  Print out:
@@ -188,14 +189,14 @@ public class BoggleStats {
      * The total score for either player.
      * The average number of words found by each player per round.
      */
-    public void summarizeGame() {
-
-        System.out.println("The total number of rounds played: " + round);
-        System.out.println("The total score of the human player for the game: " + pScoreTotal);
-        System.out.println("The total score of the computer for the game: " + cScoreTotal);
-        System.out.println("The average number of words found by the human player per round: " + pAverageWords);
-        System.out.println("The average number of words found by the computer per round: " + cAverageWords);
-    }
+//    public void summarizeGame() {
+//
+//        System.out.println("The total number of rounds played: " + round);
+//        System.out.println("The total score of the human player for the game: " + pScoreTotal);
+//        System.out.println("The total score of the computer for the game: " + cScoreTotal);
+//        System.out.println("The average number of words found by the human player per round: " + pAverageWords);
+//        System.out.println("The average number of words found by the computer per round: " + cAverageWords);
+//    }
 
     /* 
 
@@ -232,7 +233,7 @@ public class BoggleStats {
     /*
      * @return int The number of rounds played
      */
-    public int getRound() {
+    // public int getRound() {
         return this.round;
     }
 
