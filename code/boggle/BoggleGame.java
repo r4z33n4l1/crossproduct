@@ -116,9 +116,9 @@ public class BoggleGame {
                 //playRound(boardSize,choiceLetters.toUpperCase());
             }
 
-            //round is over! So, store the statistics, and end the round.
-            this.gameStats.summarizeRound();
-            this.gameStats.endRound();
+            // round is over! So, store the statistics, and end the round.
+            // this.gameStats.summarizeRound();
+            // this.gameStats.endRound();
 
             //Shall we repeat?
             System.out.println("Play again? Type 'Y' or 'N'");
