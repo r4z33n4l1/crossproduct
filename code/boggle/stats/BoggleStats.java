@@ -5,11 +5,16 @@ import java.util.Set;
 
 /**
  * The BoggleStats class for the first Assignment in CSC207, Fall 2022
- * The BoggleStats will contain statsitics related to game play Boggle 
+ * The BoggleStats will contain statistics related to game play Boggle
  */
 public class BoggleStats {
 
     /**
+
+     * It's a singleton class so, yeah!
+     */
+    private static BoggleStats instance = null;
+
      * set of words the player finds in a given round 
      */  
     private Set<String> playerWords = new HashSet<String>();  
@@ -35,29 +40,30 @@ public class BoggleStats {
      * the player's total score across every round
      */  
     private int pScoreTotal; 
+
     /**
-     * the computer's total score across every round
-     */  
-    private int cScoreTotal; 
+     * set of words that the first player finds in a given round
+     */
+    private Set<String> player1Words;
     /**
-     * the average number of words, per round, found by the player
-     */  
-    private double pAverageWords; 
+     * set of words that the second player finds in a given round
+     */
+    private Set<String> player2Words;
     /**
-     * the average number of words, per round, found by the computer
-     */  
-    private double cAverageWords; 
+     * player 1's score for the current round
+     */
+    private int player1Score;
     /**
-     * the current round being played
-     */  
-    private int round; 
+     * player 2's score for the current round
+     */
+    private int player2Score;
 
     /**
      * enumarable types of players (human or computer)
-     */  
+     */
     public enum Player {
-        Human("Human"),
-        Computer("Computer");
+        Player1("Player1"),
+        Player2("Player2");
         private final String player;
         Player(final String player) {
             this.player = player;
@@ -66,10 +72,13 @@ public class BoggleStats {
 
     /* BoggleStats constructor
      * ----------------------
-     * Sets round, totals and averages to 0.
+     * Sets scores to 0.
      * Initializes word lists (which are sets) for computer and human players.
      */
-    public BoggleStats() {
+    private BoggleStats() {
+
+        this.resetStats();
+
 
         this.round = 0;
         this.cScoreTotal = 0;
@@ -81,9 +90,31 @@ public class BoggleStats {
         this.cAverageWords = 0;
         this.cScore = 0;
         this.pScore = 0;
+
     }
 
-    /* 
+    /**
+     * Get instance of boggleStats
+     * @return current instance
+     */
+    public static synchronized BoggleStats getInstance() {
+        if (instance == null) {
+            instance = new BoggleStats();
+        }
+        return instance;
+    }
+
+    /**
+     * Sets all the stats to 0 for a new game
+     */
+    public void resetStats() {
+        this.player1Score = 0;
+        this.player2Score = 0;
+        this.player1Words = new HashSet<String>();
+        this.player2Words = new HashSet<String>();
+    }
+
+    /*
      * Add a word to a given player's word list for the current round.
      * You will also want to increment the player's score, as words are added.
      *
@@ -91,6 +122,18 @@ public class BoggleStats {
      * @param player  The player to whom the word was awarded
      */
     public void addWord(String word, Player player) {
+
+        if (player == Player.Player1) {
+            player1Words.add(word);
+            player1Score  = player1Score + (word.length() - 4) + 1;
+        } else {
+            player2Words.add(word);
+            player2Score = player2Score + (word.length() - 4) + 1;
+        }
+    }
+
+    /*
+
         if (player == Player.Human) {
             playerWords.add(word);
             wordsnotfoundyet.remove(word);
@@ -155,13 +198,19 @@ public class BoggleStats {
     }
 
     /* 
+
      * @return Set<String> The player's word list
      */
-    public Set<String> getPlayerWords() {
-        return this.playerWords;
+    public Set<String> getPlayerWords(Player player) {
+        if (player == Player.Player1) {
+            return player1Words;
+        } else {
+            return player2Words;
+        }
     }
 
     /*
+
      * @return Set<String> The computer's word list
      */
     public Set<String> getComputerWords() {
@@ -188,10 +237,15 @@ public class BoggleStats {
     }
 
     /*
+
     * @return int The current player score
     */
-    public int getScore() {
-        return this.pScore;
+    public int getScore(Player player) {
+        if (player == Player.Player1) {
+            return player1Score;
+        } else {
+            return player2Score;
+        }
     }
 
 }

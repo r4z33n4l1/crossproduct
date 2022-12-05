@@ -11,13 +11,18 @@ import java.util.*;
 public class BoggleGame {
 
     /**
-     * scanner used to interact with the user via console
+     * Timer
      */ 
-    public Scanner scanner; 
+    public Timer timer;
     /**
      * stores game statistics
      */ 
-    private BoggleStats gameStats;
+    private final BoggleStats gameStats;
+
+    /**
+     * Game mode
+     */
+    private final GameMode gameMode;
 
     /**
      * dice used to randomize letter assignments for a small grid
@@ -34,6 +39,12 @@ public class BoggleGame {
                     "DHLNOR", "EIIITT", "EMOTTT", "ENSSSU", "FIPRSY", "GORRVW", "HIPRRY", "NOOTUW", "OOOTTU"};
 
 
+    public enum GameModes {
+        PRACTICE,
+        SINGLEPLAYER,
+        MULTIPLAYER
+
+
     /**
      * Carina's hint stuff (don't touch)
      */
@@ -48,31 +59,22 @@ public class BoggleGame {
     public BoggleGame() {
         this.scanner = new Scanner(System.in);
         this.gameStats = new BoggleStats();
+
     }
-
-
-    /*
-     * Provide instructions to the user, so they know how to play the game.
-     */
-    public void giveInstructions()
-    {
-        System.out.println("The Boggle board contains a grid of letters that are randomly placed.");
-        System.out.println("We're both going to try to find words in this grid by joining the letters.");
-        System.out.println("You can form a word by connecting adjoining letters on the grid.");
-        System.out.println("Two letters adjoin if they are next to each other horizontally, ");
-        System.out.println("vertically, or diagonally. The words you find must be at least 4 letters long, ");
-        System.out.println("and you can't use a letter twice in any single word. Your points ");
-        System.out.println("will be based on word length: a 4-letter word is worth 1 point, 5-letter");
-        System.out.println("words earn 2 points, and so on. After you find as many words as you can,");
-        System.out.println("I will find all the remaining words.");
-        System.out.println("\nHit return when you're ready...");
-    }
-
 
     /* 
-     * Gets information from the user to initialize a new Boggle game.
-     * It will loop until the user indicates they are done playing.
+     * BoggleGame constructor
      */
+    public BoggleGame(GameModes mode) {
+        this.gameStats = BoggleStats.getInstance();
+        this.timer = new Timer();
+        if (mode == GameModes.PRACTICE) {
+            this.gameMode = new PracticeMode(gameStats);
+        } else if (mode == GameModes.SINGLEPLAYER) {
+            this.gameMode = new SingleplayerMode(gameStats);
+        } else {
+            this.gameMode = new MultiplayerMode(gameStats);
+
     public void playGame(){
         int boardSize;
         while(true){
@@ -131,11 +133,8 @@ public class BoggleGame {
 
             if(choiceRepeat.equals("N")) break; //end game if user inputs nothing
 
-        }
 
-        //we are done with the game! So, summarize all the play that has transpired and exit.
-        this.gameStats.summarizeGame();
-        System.out.println("Thanks for playing!");
+        }
     }
     public BoggleGrid getGrid(){
         BoggleGrid grid = new BoggleGrid(4);
@@ -143,15 +142,22 @@ public class BoggleGame {
         return grid;
     }
 
-    /* 
-     * Play a round of Boggle.
-     * This initializes the main objects: the board, the dictionary, the map of all
-     * words on the board, and the set of words found by the user. These objects are
-     * passed by reference from here to many other functions.
+    /**
+     * Begin a new game
      */
-    public void playRound(int size, String letters){
+    public void startGame(int seconds) {
+        this.timer.setSeconds(seconds);
+        this.timer.start();
+        // TODO: get the dictionaries and find all words here
+    }
 
 
+    /**
+     * This method runs when a player enters a word
+     */
+    public String addWord(String s) {
+        // TODO: Check if this word is already in the dictionary
+        return this.gameMode.addWord(s);
 
         //step 1. initialize the grid
         BoggleGrid grid = new BoggleGrid(size);
@@ -165,6 +171,7 @@ public class BoggleGame {
         humanMove(grid, allWords);
         //step 5. allow the computer to identify remaining words
         computerMove(allWords);
+
     }
 
     /*
@@ -279,6 +286,8 @@ public class BoggleGame {
         // letter at that position can be used for other words
         visited[i][j] = false;
     }
+
+}
 
     /*
      * Gets words from the user.  As words are input, check to see that they are valid.
@@ -426,4 +435,5 @@ public class BoggleGame {
         return copy_words_not_found.get(rand.nextInt(copy_words_not_found.size()));}
         
     }
+
 
