@@ -13946,7 +13946,7 @@ dictators
 dictatorship
 dictatorships
 diction
-dictionaries
+themes.dictionaries
 dictionary
 dictions
 dictum
