@@ -16,7 +16,13 @@ public class BoggleStats {
     /**
      * set of words the computer finds in a given round 
      */  
-    private Set<String> computerWords = new HashSet<String>();  
+    private Set<String> computerWords = new HashSet<String>();
+
+    /**
+     * set of words the computer finds in a given round
+     */
+    private Set<String> wordsnotfoundyet = new HashSet<String>();
+
     /**
      * the player's score for the current round
      */  
@@ -70,6 +76,7 @@ public class BoggleStats {
         this.pScoreTotal = 0;
         this.playerWords = new HashSet<String>();
         this.computerWords = new HashSet<String>();
+        this.wordsnotfoundyet = new HashSet<String>();
         this.pAverageWords = 0;
         this.cAverageWords = 0;
         this.cScore = 0;
@@ -86,8 +93,10 @@ public class BoggleStats {
     public void addWord(String word, Player player) {
         if (player == Player.Human) {
             playerWords.add(word);
+            wordsnotfoundyet.remove(word);
             pScore  = pScore + (word.length() - 4) + 1;
         } else {
+            wordsnotfoundyet.add(word);
             computerWords.add(word);
             cScore = cScore + (word.length() - 4) + 1;
         }
@@ -105,6 +114,7 @@ public class BoggleStats {
         cAverageWords = (cAverageWords + ((computerWords.size()-cAverageWords)/(round + 1)));
         playerWords.clear();
         computerWords.clear();
+        wordsnotfoundyet.clear();
         cScoreTotal = cScoreTotal + cScore;
         pScoreTotal = pScoreTotal + pScore;
         cScore = 0;
@@ -152,9 +162,30 @@ public class BoggleStats {
     }
 
     /*
+     * @return Set<String> The computer's word list
+     */
+    public Set<String> getComputerWords() {
+        return this.computerWords;
+    }
+
+    /*
+     * @return Set<String> Words that haven't been found yet (old version of computer's word list)
+     * At the moment same functionality as computerWords that will change with the addition of modes!
+     */
+    public Set<String> getWordsNotFound(){
+        return this.wordsnotfoundyet;
+    }
+
+    public void setWordsNotFound(String word){
+        wordsnotfoundyet.add(word);
+    }
+
+    /*
      * @return int The number of rounds played
      */
-    public int getRound() { return this.round; }
+    public int getRound() {
+        return this.round;
+    }
 
     /*
     * @return int The current player score
