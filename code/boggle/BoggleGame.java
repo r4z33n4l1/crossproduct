@@ -3,6 +3,7 @@ package boggle;
 import boggle.stats.BoggleStats;
 
 import java.util.*;
+import boggle.BoggleGrid;
 
 
 /**
@@ -35,12 +36,11 @@ public class BoggleGame {
 
 
     /**
-     * Carina's hint stuff (don't touch)
+     * Parameters used for hint_generator
      */
-    int inner_counter = 0;
-    String hint = "";
-//    int hint_len = 0;
-    int outer_counter = 0;
+    private int inner_counter = 0;
+    private String hint = "";
+    private int outer_counter = 0;
 
     /* 
      * BoggleGame constructor
@@ -139,7 +139,7 @@ public class BoggleGame {
     }
     public BoggleGrid getGrid(){
         BoggleGrid grid = new BoggleGrid(4);
-        grid.initalizeBoard(randomizeLetters(4));
+        grid.initializeBoard(randomizeLetters(4));
         return grid;
     }
 
@@ -346,12 +346,13 @@ public class BoggleGame {
     }
 
 
-
     /*
-     * A function that somewhat deals with the hints' algorithm
-     *  - Only human players can call for hints
+     * Function that generates a hint for the user
+     * You can only reveal one letter at a time
+     * There is a limit of 3 full word reveals per game
+     * Only human players can call for hints
      */
-    public void hint_generator() {
+    private void hint_generator() {
 
         /// Different modes? How to differentiate which player ran out of hints. confusion
         /// Does it reset every new game -> (outer loop doesn't reset if u keep playing again rn)
@@ -383,19 +384,16 @@ public class BoggleGame {
         // ^ Same thing, but full word revealed now
         else if (inner_counter == hint.length() && inner_counter > 1 && copy_words_not_found.contains(hint)) {
             outer_counter ++;
-//            inner_counter = 0;
             int left = 3 - outer_counter;
             System.out.println("You have " + left + " reveal(s) left. Use them wisely! \n Find the word: " + hint);}
 
         // ^ Same thing, if still not found (looping heh)
         else if (inner_counter > hint.length() && copy_words_not_found.contains(hint)) {
-//            inner_counter = 0;
             int left = 3 - outer_counter;
             System.out.println("You have " + left + " reveal(s) left. Use them wisely! \n Find the word: " + hint);}
 
         // Finally found, so reset to first index
         else if (inner_counter >= hint.length() && !copy_words_not_found.contains(hint)) {
-//            inner_counter = 0;
             hint = hint_randomizer(copy_words_not_found);
             inner_counter = 1;
             System.out.println("Try looking for a word starting with: " + hint.charAt(0));}
@@ -409,21 +407,15 @@ public class BoggleGame {
         // temp error catcher
         else {
             System.out.println("what happened");}
-
-//        for (String word: allWords.keySet()){
-//            System.out.println(word);}
-        
     }
 
-
     /*
-     * Helper for hints
+     * Helper for hint_generator
+     * @param words_not_found: list of words not found
      */
-    private String hint_randomizer(ArrayList<String> copy_words_not_found) {
-//        Set<String> words_not_found = gameStats.getWordsNotFound();
-//        ArrayList<String> copy_words_not_found = new ArrayList<String>(words_not_found);
+    private String hint_randomizer(ArrayList<String> words_list) {
         Random rand = new Random();
-        return copy_words_not_found.get(rand.nextInt(copy_words_not_found.size()));}
+        return words_list.get(rand.nextInt(words_list.size()));}
         
     }
 
