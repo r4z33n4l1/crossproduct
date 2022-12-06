@@ -10,7 +10,7 @@ public class baseTheme extends ThemeDecorator {
     }
 
     public String getFileName() {
-        return "code\\themes\\dictionaries\\wordlist.txt";
+        return "themes\\dictionaries\\wordlist.txt";
     }
 
     public List<String> getDices() {

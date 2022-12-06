@@ -10,7 +10,7 @@ public class citiesTheme extends ThemeDecorator {
     }
 
     public String getFileName() {
-        return "code\\themes\\dictionaries\\cities.txt";
+        return "themes\\dictionaries\\cities.txt";
     }
 
     public List<String> getDices() {
