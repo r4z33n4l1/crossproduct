@@ -77,6 +77,8 @@ public class BoggleGame {
     // int hint_len = 0;
     int outer_counter = 0;
 
+    int size;
+
     /**
      * BoggleGame constructor
      * NOTE: make sure to run the start method before beginning the game!!!! Disobey to your disadvantage
@@ -85,6 +87,7 @@ public class BoggleGame {
         this.scanner = new Scanner(System.in);
         this.gameStats = BoggleStats.getInstance();
         this.timer = new Timer();
+        this.size = size;
         // GameModes
         if (mode == GameModes.PRACTICE) {
             this.gameMode = new PracticeMode(gameStats);
@@ -103,9 +106,7 @@ public class BoggleGame {
         } else {
             this.gameTheme = new baseTheme(size);
         }
-        this.dices = this.gameTheme.getDices();
-        this.grid = new BoggleGrid(size);
-        this.grid.initializeBoard(randomizeLetters(size));
+
     }
 
     public BoggleGrid getGrid() {
@@ -119,7 +120,15 @@ public class BoggleGame {
         // get the dictionaries and find all words here
         Dictionary boggleDict = new Dictionary(this.gameTheme.getFileName());
         this.allWords = new HashMap<>();
-        findAllWords(this.allWords, boggleDict, this.grid);
+        while (allWords.size() < 5){
+            this.allWords = new HashMap<>();
+            this.dices = this.gameTheme.getDices();
+            this.grid = new BoggleGrid(this.size);
+            this.grid.initializeBoard(randomizeLetters(this.size));
+            findAllWords(this.allWords, boggleDict, this.grid);
+            System.out.println("All wordsize: " + this.allWords.size());
+        }
+//            findAllWords(this.allWords, boggleDict, this.grid);
     }
 
     /**
@@ -195,6 +204,7 @@ public class BoggleGame {
                 WordsHelper(allWords, boggleDict, boggleGrid, position_list, i, j, current_word, visited);
             }
         }
+        //System.out.println("All wordsize: " + allWords);
     }
     /*
      * A recursive helper method that given indexes i,j finds the neighbouring positions
