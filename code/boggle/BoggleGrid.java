@@ -53,7 +53,7 @@ public class BoggleGrid {
             }
             boardString.append("\n");
         }
-        return boardString.toString();
+        return boardString.toString().toUpperCase();
     }
 
     /*

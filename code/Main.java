@@ -1,13 +1,16 @@
 import boggle.BoggleGame;
+import javafx.application.Application;
+import javafx.stage.Stage;
 //import javafx.application.Application;
 //import javafx.stage.Stage;
 
 /**
  * The Main class for the first Assignment in CSC207, Fall 2022
  */
-public class Main {
+public class Main extends Application {
     /**
      * Main method.
+     *
      * @param args command line arguments.
      **/
 //    public static void main(String[] args) {
@@ -15,21 +18,27 @@ public class Main {
 //        b.giveInstructions();
 //        b.playGame();
 //    }
-    // HomeView homeView;
-    // BoggleGame boggleGame;
+     HomeView homeView;
+//     BoggleGame boggleGame;
+//    public static void main(String[] args) {
+//        BoggleGame boggleGame = new BoggleGame(BoggleGame.GameModes.PRACTICE, BoggleGame.Themes.DEFAULT, 4);
+//        boggleGame.startGame();
+//        boggleGame.hMove();
+//    }
     public static void main(String[] args) {
-        BoggleGame boggleGame = new BoggleGame(BoggleGame.GameModes.PRACTICE, BoggleGame.Themes.DEFAULT, 4);
-        boggleGame.startGame();
-        boggleGame.hMove();
-    }
+    launch(args);
+}
 
-//    @Override
-//    public void start(Stage stage) throws Exception {
+    @Override
+    public void start(Stage stage) throws Exception {
 //        boggleGame = new BoggleGame();
-//        homeView = new HomeView(stage);
-//        HomeViewController homeViewController = new HomeViewController(homeView, boggleGame);
-//        homeView.registerMouseListener(homeViewController);
+        homeView = new HomeView(stage);
+        HomeViewController homeViewController = new HomeViewController(homeView, new
+                BoggleGame(BoggleGame.GameModes.PRACTICE, BoggleGame.Themes.DEFAULT, 4));
+        homeView.registerMouseListener(homeViewController);
+//        BoardViewController boardController = new BoardViewController()
 
 
+    }
 
 }

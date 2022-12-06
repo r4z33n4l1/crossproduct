@@ -37,6 +37,11 @@ public class BoggleGame {
     public HashMap<String,ArrayList<Position>> allWords;
 
     /**
+     * Word entered by the player
+     */
+//    public String word;
+
+    /**
      * stores game statistics
      */ 
     private final BoggleStats gameStats;
@@ -253,23 +258,25 @@ public class BoggleGame {
      * @param board - The boggle board
      * @param allWords A mutable list of all legal words that can be found, given the boggleGrid grid letters
      */
-    private void humanMove(BoggleGrid board, Map<String,ArrayList<Position>> allWords){
-        System.out.println("It's your turn to find some words!");
-        while(true) {
-            System.out.println(board);
-            System.out.println(gameStats.getWordsNotFound());
-            System.out.println("Enter a word: ");
-            String word = scanner.nextLine();
-            word = word.toUpperCase();
-            if(word.equals("")){
-                break;
-            }
-            System.out.println(this.addWord(word));
-        }
+    private String humanMove(BoggleGrid board, Map<String,ArrayList<Position>> allWords, String word) {
+//        System.out.println("It's your turn to find some words!");
+//        while(true) {
+//            System.out.println(board);
+//            System.out.println(gameStats.getWordsNotFound());
+//            System.out.println("Enter a word: ");
+//            String word = scanner.nextLine();
+//            word = word.toUpperCase();
+//            if(word.equals("")){
+//                break;
+//            }
+//            System.out.println(this.addWord(word));
+//        }
+//        System.out.println(gameStats.getWordsNotFound());
+        return this.addWord(word);
     }
 
-    public void hMove() {
-        humanMove(this.grid, this.allWords);
+    public String hMove(String word) {
+        return humanMove(this.grid, this.allWords, word);
     }
 
 
