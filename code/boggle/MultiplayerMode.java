@@ -2,6 +2,8 @@ package boggle;
 
 import boggle.stats.BoggleStats;
 
+import java.util.Set;
+
 public class MultiplayerMode extends GameMode {
     private final BoggleStats gameStats;
     private boolean isPlayerOne;
@@ -18,8 +20,11 @@ public class MultiplayerMode extends GameMode {
      * @return the string to be displayed
      */
     @Override
-    public String addWord(String s) {
+    public String addWord(String s, Set<String> allWords) {
         this.isPlayerOne = !this.isPlayerOne;
+        if (!allWords.contains(s)) {
+            return "Invalid Word";
+        }
         if (gameStats.getPlayerWords(BoggleStats.Player.Player1).contains(s) ||
                 gameStats.getPlayerWords(BoggleStats.Player.Player2).contains(s)) {
             return "Word Already Found";
@@ -64,5 +69,17 @@ public class MultiplayerMode extends GameMode {
     @Override
     public BoggleGame.GameModes getGameMode() {
         return BoggleGame.GameModes.MULTIPLAYER;
+    }
+
+    /**
+     * Get string to display on the GUI especially for multiplayer mode
+     */
+    @Override
+    public String getDisplayString() {
+        if (isPlayerOne) {
+            return "Player 1's turn:";
+        } else {
+            return "Player 2's turn:";
+        }
     }
 }

@@ -2,6 +2,8 @@ package boggle;
 
 import boggle.stats.BoggleStats;
 
+import java.util.Set;
+
 public class SingleplayerMode extends GameMode {
     private final BoggleStats gameStats;
 
@@ -16,7 +18,10 @@ public class SingleplayerMode extends GameMode {
      * @return the string to be displayed
      */
     @Override
-    public String addWord(String s) {
+    public String addWord(String s, Set<String> allWords) {
+        if (!allWords.contains(s)) {
+            return "Invalid Word";
+        }
         if (gameStats.getPlayerWords(BoggleStats.Player.Player1).contains(s)) {
             return "Word Already Found";
         }
@@ -53,5 +58,13 @@ public class SingleplayerMode extends GameMode {
     @Override
     public BoggleGame.GameModes getGameMode() {
         return BoggleGame.GameModes.SINGLEPLAYER;
+    }
+
+    /**
+     * Get string to display on the GUI especially for multiplayer mode
+     */
+    @Override
+    public String getDisplayString() {
+        return "P1 vs P1 haha. Not funny? I know :/";
     }
 }
