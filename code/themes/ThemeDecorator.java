@@ -1,6 +1,7 @@
 package themes;
 
 import java.util.List;
+import java.util.Objects;
 
 public abstract class ThemeDecorator implements Theme {
     private Theme theme;

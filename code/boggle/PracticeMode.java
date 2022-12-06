@@ -7,6 +7,7 @@ public class PracticeMode extends GameMode {
 
     public PracticeMode(BoggleStats stats) {
         this.gameStats = stats;
+
     }
 
     /**

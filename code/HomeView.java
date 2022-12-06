@@ -11,7 +11,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.scene.text.Text;
+
+//import javafx.scene.text.Text;
+//import javax.swing.*;
+//import java.awt.Toolkit;
+//import java.awt.Font;
+//import java.awt.GraphicsEnvironment;
+//import java.io.FileInputStream;
+//import java.io.IOException;
+//import java.awt.FontFormatException;
+//
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
