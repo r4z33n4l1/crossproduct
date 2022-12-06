@@ -33,9 +33,9 @@ public class DiceGenerator {
         LetterFrequency letterFrequency = new LetterFrequency(words, dices);
         this.strings = letterFrequency.generateStrings();
         //print the list of strings
-        for (String string : this.strings) {
-            System.out.println(string);
-        }
+        // for (String string : this.strings) {
+        //     System.out.println(string);
+        // }
     }
 
     // main function which reads animals.txt and prints out the list of strings

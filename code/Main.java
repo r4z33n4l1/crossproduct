@@ -7,9 +7,9 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     /**
-    * Main method. 
-    * @param args command line arguments.
-    **/
+     * Main method.
+     * @param args command line arguments.
+     **/
 //    public static void main(String[] args) {
 //        BoggleGame b = new BoggleGame();
 //        b.giveInstructions();
