@@ -165,6 +165,11 @@ public class HomeView{
 
 // Adding child to parent
         anchorPane0.getChildren().add(board_menu);
+        ComboBox<String> board_colors = new ComboBox<>();
+        board_colors.setPrefWidth(150.0);
+        board_colors.setLayoutX(405.0);
+        board_colors.setLayoutY(187.0);
+        anchorPane0.getChildren().add(board_colors);
         ComboBox <String> mode_menu = new ComboBox<>();
         mode_menu.setPrefWidth(150.0);
         mode_menu.setLayoutX(405.0);
@@ -200,10 +205,7 @@ public class HomeView{
 
 // Adding child to parent
         anchorPane0.getChildren().add(boardColor);
-        ComboBox<String> board_colors = new ComboBox<>();
-        board_colors.setPrefWidth(150.0);
-        board_colors.setLayoutX(405.0);
-        board_colors.setLayoutY(187.0);
+
         board_menu.setItems(board_options);
         board_menu.setValue("4x4");
         board_colors.setItems(colors_list);
@@ -212,7 +214,7 @@ public class HomeView{
         mode_menu.setValue("Practice");
         theme_menu.setItems(theme_options);
         theme_menu.setValue("Default");
-        anchorPane0.getChildren().add(board_colors);
+
         for (int i = 0; i < anchorPane0.getChildren().size(); i++) {
             if(anchorPane0.getChildren().get(i) instanceof Label label) {
                 label.setFont(Font.font("Regular System", FontWeight.BOLD, 18.0));

@@ -251,26 +251,9 @@ public class BoggleGame {
      * @param board - The boggle board
      * @param allWords A mutable list of all legal words that can be found, given the boggleGrid grid letters
      */
+    private String humanMove(BoggleGrid board, Map<String,ArrayList<Position>> allWords, String word) {
 
-    private void humanMove(BoggleGrid board, Map<String,ArrayList<Position>> allWords){
-        System.out.println("It's your turn to find some words!");
-        while(true) {
-            System.out.println(board);
-            System.out.println(gameStats.getWordsNotFound());
-            System.out.println("Enter a word: ");
-            String word = scanner.nextLine();
-            word = word.toUpperCase();
-            if(word.equals("")){
-                break;
-            }
-            if(word.equals("11")){
-                gameStats.summarizeRound();
-            }
-            if(word.equals("00")){
-                hint_generator();
-            }
-            System.out.println(this.addWord(word));
-        }
+        return this.addWord(word);
     }
 
     /*
