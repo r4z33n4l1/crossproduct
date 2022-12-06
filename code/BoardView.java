@@ -2,8 +2,11 @@ import boggle.BoggleGame;
 import boggle.BoggleGrid;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
@@ -169,6 +172,18 @@ public class BoardView {
 
         this.backButton = backButton;
         this.submitButton = submitButton;
+        // map submitbutton to key F and backbutton to key B
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.F1) {
+                    submitButton.fire();
+                }
+                if (event.getCode() == KeyCode.F2) {
+                    backButton.fire();
+                }
+            }
+        });
         this.endButton = endButton;
         this.wordEntered = wordEntered;
         this.isValidWord = isValidWord;
@@ -178,5 +193,12 @@ public class BoardView {
         submitButton.setOnAction(BoardViewController::checkWord);
         backButton.setOnAction(BoardViewController::switchToHomePage);
 
+    }
+    public void registerKeyListener(BoardViewController boardController) {
+        submitButton.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                submitButton.fire();
+            }
+        });
     }
 }
