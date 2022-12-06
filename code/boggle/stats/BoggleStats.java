@@ -124,8 +124,8 @@ public class BoggleStats {
      * ONLY USED FOR TERMINAL TESTING
      */
     public void summarizeRound() {
-        System.out.println("The words the human player 1 found this round was " + playerWords);
-        System.out.println("The words the human player 2 found this round was " + computerWords);
+        System.out.println("The words the human player 1 found this round was " + player1Words);
+        System.out.println("The words the human player 2 found this round was " + player2Words);
         System.out.println("The words not found this round " + missing_words);
         System.out.println("The number of words the human player 1 (practice, pvp) found this round was " + player1Words.size());
         System.out.println("The number of words the human player 2 (pvp) found this round was " + player2Words.size());

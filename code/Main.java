@@ -13,30 +13,29 @@ public class Main extends Application {
      * @param args command line arguments.
      **/
 
-//    public static void main(String[] args) {
-//        BoggleGame b = new BoggleGame();
-//        b.giveInstructions();
-//        b.playGame();
-//    }
      HomeView homeView;
      BoggleGame boggleGame;
-//    public static void main(String[] args) {
-//        BoggleGame boggleGame = new BoggleGame(BoggleGame.GameModes.PRACTICE, BoggleGame.Themes.DEFAULT, 4);
-//        boggleGame.startGame();
-//        boggleGame.hMove();
-//    }
-//    launch(args);
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
-//        boggleGame = new BoggleGame();
         homeView = new HomeView(stage);
         HomeViewController homeViewController = new HomeViewController(homeView, new
                 BoggleGame(BoggleGame.GameModes.PRACTICE, BoggleGame.Themes.DEFAULT, 4));
         homeView.registerMouseListener(homeViewController);
-//        BoardViewController boardController = new BoardViewController()
-
-
     }
+
+    /// Terminal Testing (Call Statistics with 11, Hints with 00)
+    /// Comment out launch(args) and uncomment the following code to test the terminal version of the game.
+    /// You can also change the parameters of the BoggleGame constructor to test different game modes and themes.
+
+//    public static void main(String[] args) {
+//        BoggleGame boggleGame = new BoggleGame(BoggleGame.GameModes.PRACTICE, BoggleGame.Themes.DEFAULT, 4);
+//        boggleGame.startGame();
+//        boggleGame.hMoveTEST();
+//    }
 
 }

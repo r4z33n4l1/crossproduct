@@ -269,6 +269,45 @@ public class BoggleGame {
 
 
     /*
+     * Gets words from the user.  As words are input, check to see that they are valid.
+     * If yes, add the word to the player's word list (in boggleStats) and increment
+     * the player's score (in boggleStats).
+     * End the turn once the user hits return (with no word).
+     *
+     * @param board - The boggle board
+     * @param allWords A mutable list of all legal words that can be found, given the boggleGrid grid letters
+     */
+
+    private void humanMoveTEST(BoggleGrid board, Map<String,ArrayList<Position>> allWords){
+        System.out.println("It's your turn to find some words!");
+        while(true) {
+            System.out.println(board);
+            System.out.println(gameStats.getWordsNotFound());
+            System.out.println("Enter a word: ");
+            String word = scanner.nextLine();
+            word = word.toUpperCase();
+            if(word.equals("")){
+                break;
+            }
+            if(word.equals("11")){
+                gameStats.summarizeRound();
+            }
+            if(word.equals("00")){
+                hint_generator();
+            }
+            System.out.println(this.addWord(word));
+        }
+    }
+
+    /*
+     * Human Move
+     * USED IN TERMINAL TESTING
+     */
+    public void hMoveTEST() {
+        humanMoveTEST(this.grid, this.allWords);
+    }
+
+    /*
      * A function that somewhat deals with the hints' algorithm
      *  - Only human players can call for hints
      */
