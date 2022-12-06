@@ -122,7 +122,7 @@ public class BoggleGame {
      */
     public String addWord(String s) {
         // TODO: Check if this word is already in the dictionary
-        if (allWords.containsKey(s.toUpperCase())) {
+        if (allWords.containsKey(s.toLowerCase())) {
             return this.gameMode.addWord(s);
         }
         return "Invalid Word";
