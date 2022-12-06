@@ -128,11 +128,11 @@ public class BoggleStats {
      */
     public String[] endGameStats(boolean isMultiplayer) {
         String[] endStats = {"NA", "NA", "NA", "NA", "NA"};
-        endStats[0] = String.valueOf(player1Score);
+        endStats[0] = "Player1 score is " + player1Score;
         endStats[2] = player1Words.size() + " words found";
         endStats[4] = missing_words.size() + " words not found";
         if (isMultiplayer) {
-            endStats[1] = String.valueOf(player2Score);
+            endStats[1] = "Player2 score is " + String.valueOf(player2Score);
             endStats[3] = player2Words.size() + " words found";
         }
         return endStats;
