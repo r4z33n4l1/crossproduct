@@ -6,25 +6,26 @@ import javafx.stage.Stage;
  * The Main class for the first Assignment in CSC207, Fall 2022
  */
 public class Main extends Application {
+
     /**
      * Main method.
      *
      * @param args command line arguments.
      **/
+
 //    public static void main(String[] args) {
 //        BoggleGame b = new BoggleGame();
 //        b.giveInstructions();
 //        b.playGame();
 //    }
      HomeView homeView;
-//     BoggleGame boggleGame;
+     BoggleGame boggleGame;
 //    public static void main(String[] args) {
 //        BoggleGame boggleGame = new BoggleGame(BoggleGame.GameModes.PRACTICE, BoggleGame.Themes.DEFAULT, 4);
 //        boggleGame.startGame();
 //        boggleGame.hMove();
 //    }
-    launch(args);
-}
+//    launch(args);
 
     @Override
     public void start(Stage stage) throws Exception {

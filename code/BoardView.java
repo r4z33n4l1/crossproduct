@@ -76,7 +76,7 @@ public class BoardView {
         stackPane0.setMouseTransparent(true);
         Label boggleboardDisplay = new Label();
         boggleboardDisplay.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
-        boggleboardDisplay.setFont(Font.font("System", FontWeight.BOLD, 35.0));
+        boggleboardDisplay.setFont(Font.font("System", FontWeight.BOLD, 35.0)); // carina fonts
         stackPane0.getChildren().add(boggleboardDisplay);
         anchorPane0.getChildren().add(stackPane0);
         splitPane0.getItems().add(anchorPane0);
