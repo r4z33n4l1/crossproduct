@@ -4,13 +4,13 @@ import java.util.List;
 
 public class citiesTheme extends ThemeDecorator {
     private int dices;
-    public citiesTheme(Theme theme, int dices) {
-        super(theme, dices);
+    public citiesTheme(int dices) {
+        super(dices);
         this.dices = dices;
     }
 
     public String getFileName() {
-        return "dictionaries\\cities.txt";
+        return "code\\themes\\dictionaries\\cities.txt";
     }
 
     public List<String> getDices() {

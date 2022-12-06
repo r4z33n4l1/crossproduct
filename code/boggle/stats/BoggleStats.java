@@ -2,6 +2,7 @@ package boggle.stats;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * The BoggleStats class for the first Assignment in CSC207, Fall 2022
@@ -111,8 +112,8 @@ public class BoggleStats {
     public void resetStats() {
         this.player1Score = 0;
         this.player2Score = 0;
-        this.player1Words = new HashSet<String>();
-        this.player2Words = new HashSet<String>();
+        this.player1Words = new TreeSet<String>();
+        this.player2Words = new TreeSet<String>();
     }
 
     /*
@@ -133,39 +134,6 @@ public class BoggleStats {
         }
     }
 
-    /*
-
-        if (player == Player.Human) {
-            playerWords.add(word);
-            wordsnotfoundyet.remove(word);
-            pScore  = pScore + (word.length() - 4) + 1;
-        } else {
-            wordsnotfoundyet.add(word);
-            computerWords.add(word);
-            cScore = cScore + (word.length() - 4) + 1;
-        }
-    }
-
-    /* 
-     * End a given round.
-     * This will clear out the human and computer word lists, so we can begin again.
-     * The function will also update each player's total scores, average scores, and
-     * reset the current scores for each player to zero.
-     * Finally, increment the current round number by 1.
-     */
-//    public void endRound() {
-//        pAverageWords = (pAverageWords + ((playerWords.size()-pAverageWords)/(round + 1)));
-//        cAverageWords = (cAverageWords + ((computerWords.size()-cAverageWords)/(round + 1)));
-//        playerWords.clear();
-//        computerWords.clear();
-//        wordsnotfoundyet.clear();
-//        cScoreTotal = cScoreTotal + cScore;
-//        pScoreTotal = pScoreTotal + pScore;
-//        cScore = 0;
-//        pScore = 0;
-//        round = round + 1;
-//    }
-
     /* 
      * Summarize one round of boggle.  Print out:
      * The words each player found this round.
@@ -182,21 +150,6 @@ public class BoggleStats {
         System.out.println("The computer's score this round was " + cScore);
 
     }
-
-    /* 
-     * Summarize the entire boggle game.  Print out:
-     * The total number of rounds played.
-     * The total score for either player.
-     * The average number of words found by each player per round.
-     */
-//    public void summarizeGame() {
-//
-//        System.out.println("The total number of rounds played: " + round);
-//        System.out.println("The total score of the human player for the game: " + pScoreTotal);
-//        System.out.println("The total score of the computer for the game: " + cScoreTotal);
-//        System.out.println("The average number of words found by the human player per round: " + pAverageWords);
-//        System.out.println("The average number of words found by the computer per round: " + cAverageWords);
-//    }
 
     /* 
 

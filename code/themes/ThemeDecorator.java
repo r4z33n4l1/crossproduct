@@ -1,5 +1,4 @@
 package themes;
-import themes.Theme;
 
 import java.util.List;
 
@@ -7,8 +6,8 @@ public abstract class ThemeDecorator implements Theme {
     private Theme theme;
     private int dices;
 
-    public ThemeDecorator(Theme theme, int dices) {
-        this.theme = theme;
+    public ThemeDecorator(int dices) {
+        // this.theme = theme;
         this.dices = dices;
     }
 
