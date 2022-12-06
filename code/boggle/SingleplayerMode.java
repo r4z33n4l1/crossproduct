@@ -46,4 +46,12 @@ public class SingleplayerMode extends GameMode {
         scores[0] = gameStats.getPlayerWords(BoggleStats.Player.Player1).size();
         return scores;
     }
+
+    /**
+     * Get the current gamemode
+     */
+    @Override
+    public BoggleGame.GameModes getGameMode() {
+        return BoggleGame.GameModes.SINGLEPLAYER;
+    }
 }

@@ -52,9 +52,17 @@ public class MultiplayerMode extends GameMode {
      */
     @Override
     public int[] getNumWords() {
-        int[] scores = new int[1];
+        int[] scores = new int[2];
         scores[0] = gameStats.getPlayerWords(BoggleStats.Player.Player1).size();
         scores[1] = gameStats.getPlayerWords(BoggleStats.Player.Player2).size();
         return scores;
+    }
+
+    /**
+     * Get the current gamemode
+     */
+    @Override
+    public BoggleGame.GameModes getGameMode() {
+        return BoggleGame.GameModes.MULTIPLAYER;
     }
 }
