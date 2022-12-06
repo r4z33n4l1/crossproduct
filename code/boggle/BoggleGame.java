@@ -127,7 +127,7 @@ public class BoggleGame {
      */
     public String addWord(String s) {
         // TODO: Check if this word is already in the dictionary
-        if (allWords.containsKey(s.toLowerCase())) {
+        if (allWords.containsKey(s.toUpperCase())) {
             return this.gameMode.addWord(s);
         }
         return "Invalid Word";
@@ -251,6 +251,7 @@ public class BoggleGame {
      * @param board - The boggle board
      * @param allWords A mutable list of all legal words that can be found, given the boggleGrid grid letters
      */
+
     private void humanMove(BoggleGrid board, Map<String,ArrayList<Position>> allWords){
         System.out.println("It's your turn to find some words!");
         while(true) {
