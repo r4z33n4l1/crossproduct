@@ -70,9 +70,9 @@ public class BoggleGame {
      * outer_counter: keeps track of the number of times full words have been revealed
      * hint: Randomly chosen word from the list of missing_words
      */
-    int inner_counter = 0;
-    int outer_counter = 0;
-    String hint = "";
+    public int inner_counter = 0;
+    private int outer_counter = 0;
+    private String hint = "";
 
     /**
      * BoggleGame constructor
@@ -262,6 +262,9 @@ public class BoggleGame {
             if(word.equals("")){
                 break;
             }
+            if(word.equals("11")){
+                gameStats.summarizeRound();
+            }
             if(word.equals("00")){
                 hint_generator();
             }
@@ -289,7 +292,7 @@ public class BoggleGame {
         /// Atm the algorithm is global cause both players are using the same screen: need to decide on hint limit per player or global game
 
         inner_counter ++;
-
+        gameStats.HintCounter();
         Set<String> words_not_found = gameStats.getWordsNotFound();
         ArrayList<String> copy_words_not_found = new ArrayList<>(words_not_found);
         System.out.println(words_not_found + " game stats getter for words not found in hint gen");

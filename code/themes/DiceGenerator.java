@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.*;
 
 public class DiceGenerator {
-    //create a list of strings from a given txt file, and then create a list of strings from the list of strings
+
+    //create a list of strings from a given txt file,
+    // and then create a list of strings from the list of strings
     // use letter frequency to create a list of strings
 
     //the initializer will take in a txt file and create a list of strings from it
@@ -29,9 +31,11 @@ public class DiceGenerator {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        //use letter frequency to create a list of strings
+
+        // use letter frequency to create a list of strings
         LetterFrequency letterFrequency = new LetterFrequency(words, dices);
         this.strings = letterFrequency.generateStrings();
+
         //print the list of strings
         // for (String string : this.strings) {
         //     System.out.println(string);

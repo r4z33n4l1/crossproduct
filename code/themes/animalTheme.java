@@ -10,7 +10,7 @@ public class animalTheme extends ThemeDecorator {
     }
 
     public String getFileName() {
-        return "themes\\dictionaries\\animals.txt";
+        return "themes/dictionaries/animals.txt";
     }
 
     public List<String> getDices() {

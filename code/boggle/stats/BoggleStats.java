@@ -51,6 +51,11 @@ public class BoggleStats {
     private int player2Score;
 
     /**
+     * Number of hints used by the player
+     */
+    private int hintsCount;
+
+    /**
      * Enumerable types of players (human or computer)
      */
     public enum Player {
@@ -88,17 +93,18 @@ public class BoggleStats {
     public void resetStats() {
         this.player1Score = 0;
         this.player2Score = 0;
+        this.hintsCount = 0;
         this.player1Words = new TreeSet<String>();
         this.player2Words = new TreeSet<String>();
         this.missing_words = new HashSet<String>();
     }
 
-    /*
+    /**
      * Add a word to a given player's word list for the current round.
      * You will also want to increment the player's score, as words are added.
      *
-     * @param word     The word to be added to the list
-     * @param player  The player to whom the word was awarded
+     * @param word The word to be added to the list
+     * @param player The player to whom the word was awarded
      */
     public void addWord(String word, Player player) {
         String insensitive_word = word.toLowerCase();
@@ -118,13 +124,16 @@ public class BoggleStats {
      * ONLY USED FOR TERMINAL TESTING
      */
     public void summarizeRound() {
-        System.out.println("The words the human player found this round was " + playerWords);
-        System.out.println("The words the computer found this round was " + computerWords);
-        System.out.println("The number of words the human player found this round was " + playerWords.size());
-        System.out.println("The number of words the computer found this round was " + computerWords.size());
+        System.out.println("The words the human player 1 found this round was " + playerWords);
+        System.out.println("The words the human player 2 found this round was " + computerWords);
+        System.out.println("The words not found this round " + missing_words);
+        System.out.println("The number of words the human player 1 (practice, pvp) found this round was " + player1Words.size());
+        System.out.println("The number of words the human player 2 (pvp) found this round was " + player2Words.size());
+        System.out.println("The number of words not found this round " + missing_words.size());
+        System.out.println("The number of hints called this round " + hintsCount);
     }
 
-    /*
+    /**
      * @return Set<String> The player's word list
      */
     public Set<String> getPlayerWords(Player player) {
@@ -135,19 +144,30 @@ public class BoggleStats {
         }
     }
 
-    /*
-     * @return Set<String> Words that haven't been found yet (old version of computer's word list)
-     * At the moment same functionality as computerWords that will change with the addition of modes!
+    /**
+     * Getter method for missing words
+     * @return Set<String> Words that have not been found yet (for both players or a single player)
      */
     public Set<String> getWordsNotFound(){
         return this.missing_words;
     }
 
+    /**
+     * Setter method for missing words
+     * Used in helper method for findAllWords in BoggleGame class
+     */
     public void setWordsNotFound(String word){
         missing_words.add(word);
     }
 
-    /*
+    /**
+     * Hint counter
+     */
+    public void HintCounter(){
+        hintsCount++;
+    }
+
+    /**
     * @return int The current player's score
     */
     public int getScore(Player player) {
@@ -157,5 +177,4 @@ public class BoggleStats {
             return player2Score;
         }
     }
-
 }

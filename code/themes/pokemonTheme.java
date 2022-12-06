@@ -10,7 +10,7 @@ public class pokemonTheme extends ThemeDecorator {
     }
 
     public String getFileName() {
-        return "themes\\dictionaries\\pokemon.txt";
+        return "themes/dictionaries/pokemon.txt";
     }
 
     public List<String> getDices() {
