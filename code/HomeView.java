@@ -1,4 +1,5 @@
 import boggle.BoggleGame;
+import boggle.Dictionary;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -12,20 +13,24 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class HomeView{
-    BoggleGame boggleGame;
+//    BoggleGame boggleGame;
     Stage stage;
 
     private AnchorPane root;
     private ComboBox<String> board_menu;
-    private ComboBox<String> board_colors;
+    ComboBox<String> board_colors;
     private ComboBox<String> mode_menu;
     private ComboBox<String> theme_menu;
     private Slider time_slider;
     private Button start_button;
+
+    HashMap color_mapping;
     public HomeView(Stage stage) throws IOException {
-//        this.boggleGame = boggleGame;
         this.stage = stage;
         initUI();
     }
@@ -46,9 +51,10 @@ public class HomeView{
     ObservableList<String> colors_list =
         FXCollections.observableArrayList(
             "Default",
+            "Light Mode",
             "Dark mode",
-            "Dark Blue",
-            "Light Blue"
+            "Purple",
+            "Green Blue"
         );
     ObservableList<String> modes_list =
         FXCollections.observableArrayList(
@@ -58,6 +64,38 @@ public class HomeView{
         );
 
     private void initUI() {
+        HashMap<String, ArrayList<String>> color_mapping = new HashMap<String, ArrayList<String>>();
+        color_mapping.put("Default", new ArrayList<>() {{
+            add("#FFFFFF");
+            add("#000000");
+            add("#FFFFFF");
+        }});
+        color_mapping.put("Light Mode", new ArrayList<>() {{
+            add("#FFFFFF");
+            add("#000000");
+            add("#0DB14B");
+        }});
+        color_mapping.put("Dark mode", new ArrayList<>() {{
+            add("#000000");
+            add("#FFFFFF");
+            add("#6E005F");
+        }});
+        color_mapping.put("Purple", new ArrayList<>() {{
+            add("#6E005F");
+            add("#FFFFFF");
+            add("#FF5733");
+        }});
+        color_mapping.put("Green Blue", new ArrayList<>() {{
+            add("#18453B");
+            add("#FFFFFF");
+            add("#FF5733");
+        }});
+//        color_mapping.put("Default", new ArrayList<>(List.of("#000000", "#FFFFFF")));
+//        color_mapping.put("Dark mode", new ArrayList<>(List.of("#FFFFFF", "#000000")));
+//        color_mapping.put("Dark Blue", new ArrayList<>(List.of("#191970", "#FFFFFF")));
+//        color_mapping.put("Light Blue", new ArrayList<>(List.of("#1E90FF", "#FFFFFF")));
+
+
 
         AnchorPane anchorPane0 = new AnchorPane();
         anchorPane0.setPrefHeight(508.0);
@@ -171,6 +209,7 @@ public class HomeView{
         this.time_slider = timeSlider;
         this.start_button = startButton;
         this.board_colors = board_colors;
+        this.color_mapping = color_mapping;
         stage.setTitle("Boggle Game");
         stage.setScene(new Scene(anchorPane0));
         stage.show();

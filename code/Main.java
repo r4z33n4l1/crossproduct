@@ -23,10 +23,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        boggleGame = new BoggleGame();
+//        boggleGame = new BoggleGame();
         homeView = new HomeView(stage);
-        HomeViewController homeViewController = new HomeViewController(homeView, boggleGame);
+        HomeViewController homeViewController = new HomeViewController(homeView, new BoggleGame());
         homeView.registerMouseListener(homeViewController);
+//        BoardViewController boardController = new BoardViewController()
 
 
 
