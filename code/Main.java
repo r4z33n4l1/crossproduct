@@ -18,7 +18,7 @@ public class Main {
     // HomeView homeView;
     // BoggleGame boggleGame;
     public static void main(String[] args) {
-        BoggleGame boggleGame = new BoggleGame(BoggleGame.GameModes.PRACTICE, BoggleGame.Themes.DEFAULT, 4);
+        BoggleGame boggleGame = new BoggleGame(BoggleGame.GameModes.PRACTICE, BoggleGame.Themes.POKEMON, 10);
         boggleGame.startGame();
         boggleGame.hMove();
     }

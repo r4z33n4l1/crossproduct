@@ -11,57 +11,47 @@ import java.util.TreeSet;
 public class BoggleStats {
 
     /**
-
      * It's a singleton class so, yeah!
      */
     private static BoggleStats instance = null;
 
     /**
-     *  set of words the player finds in a given round 
+     * Set of words the player finds in a given round
      */  
-    private Set<String> playerWords = new HashSet<String>();  
+    private Set<String> playerWords = new HashSet<String>();
+
     /**
-     * set of words the computer finds in a given round 
+     * Set of words the computer finds in a given round
      */  
     private Set<String> computerWords = new HashSet<String>();
 
     /**
-     * set of words the computer finds in a given round
+     * Set of words the computer finds in a given round
      */
-    private Set<String> wordsnotfoundyet = new HashSet<String>();
+    private Set<String> missing_words = new HashSet<String>();
 
     /**
-     * the player's score for the current round
-     */  
-    private int pScore; 
-    /**
-     * the computer's score for the current round
-     */  
-    private int cScore; 
-    /**
-     * the player's total score across every round
-     */  
-    private int pScoreTotal; 
-
-    /**
-     * set of words that the first player finds in a given round
+     * Set of words that the first player finds in a given round
      */
     private Set<String> player1Words;
+
     /**
-     * set of words that the second player finds in a given round
+     * Set of words that the second player finds in a given round
      */
     private Set<String> player2Words;
+
     /**
-     * player 1's score for the current round
+     * Player 1's score for the current round
      */
     private int player1Score;
+
     /**
-     * player 2's score for the current round
+     * Player 2's score for the current round
      */
     private int player2Score;
 
     /**
-     * enumarable types of players (human or computer)
+     * Enumerable types of players (human or computer)
      */
     public enum Player {
         Player1("Player1"),
@@ -78,21 +68,7 @@ public class BoggleStats {
      * Initializes word lists (which are sets) for computer and human players.
      */
     private BoggleStats() {
-
         this.resetStats();
-
-
-//        this.round = 0;
-//        this.cScoreTotal = 0;
-//        this.pScoreTotal = 0;
-//        this.playerWords = new HashSet<String>();
-//        this.computerWords = new HashSet<String>();
-//        this.wordsnotfoundyet = new HashSet<String>();
-//        this.pAverageWords = 0;
-//        this.cAverageWords = 0;
-//        this.cScore = 0;
-//        this.pScore = 0;
-
     }
 
     /**
@@ -114,6 +90,7 @@ public class BoggleStats {
         this.player2Score = 0;
         this.player1Words = new TreeSet<String>();
         this.player2Words = new TreeSet<String>();
+        this.missing_words = new HashSet<String>();
     }
 
     /*
@@ -124,35 +101,30 @@ public class BoggleStats {
      * @param player  The player to whom the word was awarded
      */
     public void addWord(String word, Player player) {
-
+        String insensitive_word = word.toLowerCase();
         if (player == Player.Player1) {
-            player1Words.add(word);
-            player1Score  = player1Score + (word.length() - 4) + 1;
+            player1Words.add(insensitive_word);
+            player1Score  = player1Score + (insensitive_word.length() - 4) + 1;
+            missing_words.remove(insensitive_word);
         } else {
-            player2Words.add(word);
-            player2Score = player2Score + (word.length() - 4) + 1;
+            player2Words.add(insensitive_word);
+            missing_words.remove(insensitive_word);
+            player2Score = player2Score + (insensitive_word.length() - 4) + 1;
         }
     }
 
-    /* 
-     * Summarize one round of boggle.  Print out:
-     * The words each player found this round.
-     * Each number of words each player found this round.
-     * Each player's score this round.
+    /*
+     * Summary of the game
+     * ONLY USED FOR TERMINAL TESTING
      */
     public void summarizeRound() {
-
         System.out.println("The words the human player found this round was " + playerWords);
         System.out.println("The words the computer found this round was " + computerWords);
         System.out.println("The number of words the human player found this round was " + playerWords.size());
         System.out.println("The number of words the computer found this round was " + computerWords.size());
-        System.out.println("The human player's score this round was " + pScore);
-        System.out.println("The computer's score this round was " + cScore);
-
     }
 
-    /* 
-
+    /*
      * @return Set<String> The player's word list
      */
     public Set<String> getPlayerWords(Player player) {
@@ -164,35 +136,19 @@ public class BoggleStats {
     }
 
     /*
-
-     * @return Set<String> The computer's word list
-     */
-    public Set<String> getComputerWords() {
-        return this.computerWords;
-    }
-
-    /*
      * @return Set<String> Words that haven't been found yet (old version of computer's word list)
      * At the moment same functionality as computerWords that will change with the addition of modes!
      */
     public Set<String> getWordsNotFound(){
-        return this.wordsnotfoundyet;
+        return this.missing_words;
     }
 
     public void setWordsNotFound(String word){
-        wordsnotfoundyet.add(word);
+        missing_words.add(word);
     }
 
     /*
-     * @return int The number of rounds played
-     */
-    // public int getRound() {
-    //    return this.round;
-    //}
-
-    /*
-
-    * @return int The current player score
+    * @return int The current player's score
     */
     public int getScore(Player player) {
         if (player == Player.Player1) {

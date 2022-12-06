@@ -37,7 +37,7 @@ public class BoggleGame {
     public HashMap<String,ArrayList<Position>> allWords;
 
     /**
-     * stores game statistics
+     * Stores game statistics
      */ 
     private final BoggleStats gameStats;
 
@@ -65,12 +65,14 @@ public class BoggleGame {
     }
 
     /**
-     * Carina's hint stuff (don't touch)
+     * Global variables for hint_generator
+     * inner_counter: keeps track of the number of times the hint_generator has been called / the number of hints generated
+     * outer_counter: keeps track of the number of times full words have been revealed
+     * hint: Randomly chosen word from the list of missing_words
      */
     int inner_counter = 0;
-    String hint = "";
-    // int hint_len = 0;
     int outer_counter = 0;
+    String hint = "";
 
     /**
      * BoggleGame constructor
@@ -80,6 +82,7 @@ public class BoggleGame {
         this.scanner = new Scanner(System.in);
         this.gameStats = BoggleStats.getInstance();
         this.timer = new Timer();
+
         // GameModes
         if (mode == GameModes.PRACTICE) {
             this.gameMode = new PracticeMode(gameStats);
@@ -88,6 +91,7 @@ public class BoggleGame {
         } else if (mode == GameModes.MULTIPLAYER) {
             this.gameMode = new MultiplayerMode(gameStats);
         }
+
         // GameThemes
         if (theme == Themes.ANIMALS) {
             this.gameTheme = new animalTheme(size);
@@ -98,6 +102,7 @@ public class BoggleGame {
         } else {
             this.gameTheme = new baseTheme(size);
         }
+
         this.dices = this.gameTheme.getDices();
         this.grid = new BoggleGrid(size);
         this.grid.initializeBoard(randomizeLetters(size));
@@ -111,7 +116,7 @@ public class BoggleGame {
      * Begin a new game
      */
     public void startGame() {
-        // get the dictionaries and find all words here
+        // Get the dictionaries and find all words here
         Dictionary boggleDict = new Dictionary(this.gameTheme.getFileName());
         this.allWords = new HashMap<>();
         findAllWords(this.allWords, boggleDict, this.grid);
@@ -149,7 +154,6 @@ public class BoggleGame {
         }
         return letters.toString();
     }
-
 
     /*
      * This should be a recursive function that finds all valid words on the boggle board.
@@ -191,6 +195,8 @@ public class BoggleGame {
             }
         }
     }
+
+
     /*
      * A recursive helper method that given indexes i,j finds the neighbouring positions
      * to [i, j] and checks recursively to see if the word being formed is valid and not repeated
@@ -211,14 +217,14 @@ public class BoggleGame {
         // Make current position as visited so as not to use the letter at that position again when forming a word
         visited[i][j] = true;
         String word = current_word + boggleGrid.getCharAt(i, j);
-        // if word formed is valid and in the dictionary, add it to list of legal words found
+        // If word formed is valid and in the dictionary, add it to list of legal words found
         if (position_list.size() >= 4) {
             if (boggleDict.containsWord(word)) {
                 list_of_words.put(word, position_list);
                 gameStats.setWordsNotFound(word);
             }
         }
-        // if word is a prefix, check neighbouring values and find valid words recursively
+        // If word is a prefix, check neighbouring values and find valid words recursively
         if (boggleDict.isPrefix(word)) {
             for (int row = i - 1; row <= i + 1; row++) {
                 for (int col = j - 1; col <= j + 1; col++) {
@@ -231,17 +237,9 @@ public class BoggleGame {
                 }
             }
         }
-        // change the current position back to not visited so that the
-        // letter at that position can be used for other words
+        // Change the current position back to not visited so that the
+        // Letter at that position can be used for other words
         visited[i][j] = false;
-    }
-
-    public String getHint() {
-        // TODO: Carina, over to you :)
-        // probably useful stuff
-        // hint_generator();
-        // System.out.println(this.hint);
-        return "hintStuff";
     }
 
     /*
@@ -264,10 +262,17 @@ public class BoggleGame {
             if(word.equals("")){
                 break;
             }
+            if(word.equals("00")){
+                hint_generator();
+            }
             System.out.println(this.addWord(word));
         }
     }
 
+    /*
+     * Human Move
+     * USED IN TERMINAL TESTING
+     */
     public void hMove() {
         humanMove(this.grid, this.allWords);
     }
@@ -287,6 +292,7 @@ public class BoggleGame {
 
         Set<String> words_not_found = gameStats.getWordsNotFound();
         ArrayList<String> copy_words_not_found = new ArrayList<>(words_not_found);
+        System.out.println(words_not_found + " game stats getter for words not found in hint gen");
 
         // No words available, return
         if (copy_words_not_found.size() == 0){
@@ -309,19 +315,16 @@ public class BoggleGame {
         // ^ Same thing, but full word revealed now
         else if (inner_counter == hint.length() && inner_counter > 1 && copy_words_not_found.contains(hint)) {
             outer_counter ++;
-//            inner_counter = 0;
             int left = 3 - outer_counter;
             System.out.println("You have " + left + " reveal(s) left. Use them wisely! \n Find the word: " + hint);}
 
         // ^ Same thing, if still not found (looping heh)
         else if (inner_counter > hint.length() && copy_words_not_found.contains(hint)) {
-//            inner_counter = 0;
             int left = 3 - outer_counter;
             System.out.println("You have " + left + " reveal(s) left. Use them wisely! \n Find the word: " + hint);}
 
         // Finally found, so reset to first index
         else if (inner_counter >= hint.length() && !copy_words_not_found.contains(hint)) {
-//            inner_counter = 0;
             hint = hint_randomizer(copy_words_not_found);
             inner_counter = 1;
             System.out.println("Try looking for a word starting with: " + hint.charAt(0));}
@@ -332,13 +335,9 @@ public class BoggleGame {
             inner_counter = 1;
             System.out.println("Try looking for a word starting with: " + hint.charAt(0));}
 
-        // temp error catcher
+        // Temp error catcher
         else {
             System.out.println("what happened");}
-
-//        for (String word: allWords.keySet()){
-//            System.out.println(word);}
-
     }
 
 
@@ -346,11 +345,10 @@ public class BoggleGame {
      * Helper for hints
      */
     private String hint_randomizer(ArrayList<String> copy_words_not_found) {
-        // Set<String> words_not_found = gameStats.getWordsNotFound();
-        // ArrayList<String> copy_words_not_found = new ArrayList<String>(words_not_found);
         Random rand = new Random();
-        return copy_words_not_found.get(rand.nextInt(copy_words_not_found.size()));}
-
+        return copy_words_not_found.get(rand.nextInt(copy_words_not_found.size()));
     }
+
+}
 
 
