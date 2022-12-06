@@ -44,7 +44,7 @@ public class BoggleGame {
     /**
      * stores game statistics
      */
-    private final BoggleStats gameStats;
+    private BoggleStats gameStats;
 
     /**
      * Game mode
@@ -305,6 +305,25 @@ public class BoggleGame {
      */
     public void hMoveTEST() {
         humanMoveTEST(this.grid, this.allWords);
+    }
+
+    /**
+     * Return end game statistics
+     * @return Array -
+     * 0: Player1 score
+     * 1: Player2 score
+     * 2: Number of words player 1 found
+     * 3: Number of words player 2 found
+     * 4: Number of words not found by either
+     * // Not yet implemented:
+     * 5: Number of hints used by player 1
+     * 6: Number of hints used by player 2
+     */
+    public String[] getEndGameStats() {
+        if (this.gameMode.getGameMode() == GameModes.MULTIPLAYER) {
+            return this.gameStats.endGameStats(true);
+        }
+        return this.gameStats.endGameStats(false);
     }
 
     /*

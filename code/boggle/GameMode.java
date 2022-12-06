@@ -22,4 +22,9 @@ public abstract class GameMode {
      * @return
      */
     public abstract int[] getNumWords();
+
+    /**
+     * Get the current gamemode
+     */
+    public abstract BoggleGame.GameModes getGameMode();
 }

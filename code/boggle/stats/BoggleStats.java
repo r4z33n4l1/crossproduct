@@ -16,16 +16,6 @@ public class BoggleStats {
     private static BoggleStats instance = null;
 
     /**
-     * Set of words the player finds in a given round
-     */  
-    private Set<String> playerWords = new HashSet<String>();
-
-    /**
-     * Set of words the computer finds in a given round
-     */  
-    private Set<String> computerWords = new HashSet<String>();
-
-    /**
      * Set of words the computer finds in a given round
      */
     private Set<String> missing_words = new HashSet<String>();
@@ -131,6 +121,21 @@ public class BoggleStats {
         System.out.println("The number of words the human player 2 (pvp) found this round was " + player2Words.size());
         System.out.println("The number of words not found this round " + missing_words.size());
         System.out.println("The number of hints called this round " + hintsCount);
+    }
+
+    /**
+     * Return End Game Stats
+     */
+    public String[] endGameStats(boolean isMultiplayer) {
+        String[] endStats = {"NA", "NA", "NA", "NA", "NA"};
+        endStats[0] = "Player1 score is " + player1Score;
+        endStats[2] = player1Words.size() + " words found";
+        endStats[4] = missing_words.size() + " words not found";
+        if (isMultiplayer) {
+            endStats[1] = "Player2 score is " + String.valueOf(player2Score);
+            endStats[3] = player2Words.size() + " words found";
+        }
+        return endStats;
     }
 
     /**
