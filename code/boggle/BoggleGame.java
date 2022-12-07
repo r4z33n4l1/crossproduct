@@ -135,11 +135,7 @@ public class BoggleGame {
      * This method runs when a player enters a word
      */
     public String addWord(String s) {
-        // TODO: Check if this word is already in the dictionary
-        if (allWords.containsKey(s.toLowerCase())) {
-            return this.gameMode.addWord(s);
-        }
-        return "Invalid Word";
+        return this.gameMode.addWord(s, allWords.keySet());
     }
 
     /*

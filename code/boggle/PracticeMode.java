@@ -2,6 +2,8 @@ package boggle;
 
 import boggle.stats.BoggleStats;
 
+import java.util.Set;
+
 public class PracticeMode extends GameMode {
     private final BoggleStats gameStats;
 
@@ -17,7 +19,10 @@ public class PracticeMode extends GameMode {
      * @return the string to be displayed
      */
     @Override
-    public String addWord(String s) {
+    public String addWord(String s, Set<String> allWords) {
+        if (!allWords.contains(s)) {
+            return "Invalid Word";
+        }
         if (gameStats.getPlayerWords(BoggleStats.Player.Player1).contains(s)) {
             return "Word Already Found";
         }
@@ -54,5 +59,13 @@ public class PracticeMode extends GameMode {
     @Override
     public BoggleGame.GameModes getGameMode() {
         return BoggleGame.GameModes.PRACTICE;
+    }
+
+    /**
+     * Get string to display on the GUI especially for multiplayer mode
+     */
+    @Override
+    public String getDisplayString() {
+        return "Practicing eh ;)";
     }
 }
