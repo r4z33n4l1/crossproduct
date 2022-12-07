@@ -332,6 +332,13 @@ public class BoggleGame {
         return this.gameStats.endGameStats(false);
     }
 
+    /**
+     * Get display string
+     */
+    public String getDisplayString() {
+        return this.gameMode.getDisplayString();
+    }
+
     /*
      * A function that somewhat deals with the hints' algorithm
      *  - Only human players can call for hints
