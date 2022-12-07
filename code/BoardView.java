@@ -34,6 +34,9 @@ public class BoardView {
 
     private Button backButton;
 
+
+    Label wordLabel;
+
     Label isValidWord;
 
     TextField wordEntered;
@@ -63,7 +66,7 @@ public class BoardView {
 
         SplitPane splitPane0 = new SplitPane();
         splitPane0.setPrefHeight(519.0);
-        splitPane0.setPrefWidth(663.0);
+        splitPane0.setPrefWidth(745.0);
         splitPane0.setDividerPositions(0.6);
         //make the divider transparent
         AnchorPane anchorPane0 = new AnchorPane();
@@ -90,7 +93,7 @@ public class BoardView {
         wordLabel.setLayoutX(26.0);
         wordLabel.setLayoutY(14.0);
         wordLabel.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
-        wordLabel.setText("Enter word found below:");
+        wordLabel.setText(boggleGame.getDisplayString()+ "enter word below:");
         wordLabel.setFont(Font.font("System", FontWeight.BOLD, 18.0));
         anchorPane1.getChildren().add(wordLabel);
         TextField wordEntered = new TextField();
@@ -145,12 +148,9 @@ public class BoardView {
         stackforisvalid.setPrefHeight(35.0);
         stackforisvalid.setPrefWidth(155.0);
         Label isValidWord = new Label();
-//        isValidWord.setLayoutX(108.0);
-//        isValidWord.setLayoutY(156.0);
         isValidWord.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
         stackforisvalid.getChildren().add(isValidWord);
         anchorPane1.getChildren().add(stackforisvalid);
-//        anchorPane1.getChildren().add(isValidWord);
         Button hintButton = new Button();
         hintButton.setLayoutX(63.0);
         hintButton.setLayoutY(189.0);
@@ -212,6 +212,7 @@ public class BoardView {
         back_mapping.setText("Ctrl+4: Back to Home");
         back_mapping.setPrefHeight(17.0);
         back_mapping.setPrefWidth(120.0);
+        anchorPane1.getChildren().add(back_mapping);
         BoggleGrid boggleGrid = boggleGame.getGrid();
         String boggleBoard = boggleGrid.toString();
         boggleboardDisplay.setText(boggleBoard);
@@ -223,36 +224,16 @@ public class BoardView {
 
         this.backButton = backButton;
         this.submitButton = submitButton;
-        // map submitbutton to key control+1 and backbutton to key control+4
         submitButton.setMnemonicParsing(true);
         scene.getAccelerators().put(new KeyCodeCombination(KeyCode.DIGIT1, KeyCombination.CONTROL_DOWN), submitButton::fire);
         backButton.setMnemonicParsing(true);
         scene.getAccelerators().put(new KeyCodeCombination(KeyCode.DIGIT4, KeyCombination.CONTROL_DOWN), backButton::fire);
-//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent event) {
-//                if (event.getCode() == KeyCode.DIGIT1) {
-//                    submitButton.fire();
-//                }
-//                if (event.getCode() == KeyCode.DIGIT4) {
-//                    backButton.fire();
-//                }
-//            }
-//        });
-//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent event) {
-//                if (event.getCode() == KeyCode.1) {
-//                    submitButton.fire();
-//                }
-//                if (event.getCode() == KeyCode.F2) {
-//                    backButton.fire();
-//                }
-//            }
-//        });
+        endButton.setMnemonicParsing(true);
+        scene.getAccelerators().put(new KeyCodeCombination(KeyCode.DIGIT3, KeyCombination.CONTROL_DOWN), endButton::fire);
         this.endButton = endButton;
         this.wordEntered = wordEntered;
         this.isValidWord = isValidWord;
+        this.wordLabel = wordLabel;
     }
     public void registerMouseListener(BoardViewController boardController) {
         endButton.setOnAction(BoardViewController::showStatsPage);
@@ -260,11 +241,4 @@ public class BoardView {
         backButton.setOnAction(BoardViewController::switchToHomePage);
 
     }
-//    public void registerKeyListener(BoardViewController boardController) {
-//        submitButton.setOnKeyPressed(event -> {
-//            if (event.getCode().equals(KeyCode.ENTER)) {
-//                submitButton.fire();
-//            }
-//        });
-//    }
 }

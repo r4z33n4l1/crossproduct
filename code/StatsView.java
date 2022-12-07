@@ -101,7 +101,7 @@ public class StatsView {
         button8.setLayoutX(257.0);
         button8.setLayoutY(292.0);
         button8.setText("Home Page");
-        button8.setFont(Font.font("System", FontWeight.BOLD, 14.0));
+        button8.setFont(Font.font("System", 14.0));
         button8.setMnemonicParsing(false);
         HomeButton = button8;
         button8.setOnAction(e -> {

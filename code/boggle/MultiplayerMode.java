@@ -77,9 +77,9 @@ public class MultiplayerMode extends GameMode {
     @Override
     public String getDisplayString() {
         if (isPlayerOne) {
-            return "Player 1's turn:";
+            return "Player 1 ";
         } else {
-            return "Player 2's turn:";
+            return "Player 2 ";
         }
     }
 }

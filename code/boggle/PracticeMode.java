@@ -66,6 +66,6 @@ public class PracticeMode extends GameMode {
      */
     @Override
     public String getDisplayString() {
-        return "Practicing eh ;)";
+        return "Player 1 ";
     }
 }
