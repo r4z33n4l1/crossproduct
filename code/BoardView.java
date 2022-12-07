@@ -15,6 +15,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,8 +46,10 @@ public class BoardView {
 
     Label isValidWord;
 
+    Font custom_font2 = Font.loadFont(new FileInputStream("fonts/Boxed In Regular.ttf"), 30);
+
     TextField wordEntered;
-    public BoardView(HomeView view, BoggleGame boggleGame){
+    public BoardView(HomeView view, BoggleGame boggleGame) throws FileNotFoundException {
         this.boggleGame = boggleGame;
         this.homeView = view;
         this.stage = view.stage;
@@ -84,8 +89,11 @@ public class BoardView {
         stackPane0.setLayoutY(4.0);
         stackPane0.setMouseTransparent(true);
         Label boggleboardDisplay = new Label();
+
         boggleboardDisplay.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
-        boggleboardDisplay.setFont(Font.font("System", FontWeight.BOLD, 35.0));
+        //boggleboardDisplay.setFont(Font.font("System", FontWeight.BOLD, 35.0));
+        boggleboardDisplay.setFont(custom_font2);
+
         stackPane0.getChildren().add(boggleboardDisplay);
         anchorPane0.getChildren().add(stackPane0);
         splitPane0.getItems().add(anchorPane0);

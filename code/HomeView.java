@@ -53,7 +53,8 @@ public class HomeView{
                     "4x4",
                     "5x5",
                     "6x6",
-                    "7x7"
+                    "7x7",
+                    "8x8"
             );
     ObservableList<String> colors_list =
             FXCollections.observableArrayList(
@@ -79,6 +80,7 @@ public class HomeView{
         board_size_mapping.put("5x5", 5);
         board_size_mapping.put("6x6", 6);
         board_size_mapping.put("7x7", 7);
+        board_size_mapping.put("8x8", 8);
         color_mapping.put("Default", new ArrayList<>() {{
             add("#FFFFFF");
             add("#000000");

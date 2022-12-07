@@ -128,7 +128,7 @@ public class BoggleGame {
             this.grid = new BoggleGrid(this.size);
             this.grid.initializeBoard(randomizeLetters(this.size));
             findAllWords(this.allWords, boggleDict, this.grid);
-            System.out.println("All wordsize: " + this.allWords.size());
+            //System.out.println("All wordsize: " + this.allWords.size());
         }
 //            findAllWords(this.allWords, boggleDict, this.grid);
     }
@@ -346,6 +346,7 @@ public class BoggleGame {
      *  - Only human players can call for hints
      */
     public String hint_generator() {
+        System.out.println(gameStats.getWordsNotFound().toString());
 
         index_tracker ++;
 
@@ -365,7 +366,7 @@ public class BoggleGame {
             String displayed_counter = "HINTS LEFT: " + (hint_count_display);
             String hint_return = "All words have been found!";
 
-            System.out.println(hint_return + "\n" + displayed_counter);
+
 
             return hint_return + "\n" + displayed_counter;
         }
@@ -378,7 +379,7 @@ public class BoggleGame {
             String displayed_counter = "HINTS LEFT: " + (hint_count_display);
             String hint_return = "Not so fast! You have used up all your hints!";
 
-            System.out.println(hint_return + "\n" + displayed_counter);
+
 
             return hint_return + "\n" + displayed_counter;
         }
@@ -389,8 +390,6 @@ public class BoggleGame {
             int hint_count_display = hint_limit - gameStats.GetHintCount();
             String displayed_counter = "HINTS LEFT: " + (hint_count_display);
 
-            System.out.println(displayed + "\n" + displayed_counter);
-            System.out.println(hint);
 
             return displayed + "\n" + displayed_counter;
         }
@@ -405,8 +404,6 @@ public class BoggleGame {
 
             String underscores = IntStream.range(0, hint.length() - 1).mapToObj(i ->"_").collect(Collectors.joining(""));
             displayed = "Try looking for a word starting with: " + hint.charAt(0) + underscores;
-            System.out.println(displayed + "\n" + displayed_counter);
-            System.out.println(hint);
 
             return displayed + "\n" + displayed_counter;
         }
@@ -421,9 +418,6 @@ public class BoggleGame {
             String underscores = IntStream.range(0, hint.length() - index_tracker).mapToObj(i -> "_").collect(Collectors.joining(""));
             displayed = "Try looking for a word starting with: " + hint.substring(0, index_tracker) + underscores;
 
-            System.out.println(displayed + "\n" + displayed_counter);
-            System.out.println(hint);
-            System.out.println(index_tracker + " index tracker");
 
             return displayed + "\n" + displayed_counter;
         }
@@ -433,9 +427,7 @@ public class BoggleGame {
              displayed = "Find the word: " + hint;
             int hint_count_display = hint_limit - gameStats.GetHintCount();
             String displayed_counter = "HINTS LEFT: " + (hint_count_display);
-            System.out.println(displayed + "\n" + displayed_counter);
-            System.out.println(hint);
-            System.out.println(index_tracker + " index tracker");
+
             return displayed + "\n" + displayed_counter;
         }
 
@@ -449,13 +441,12 @@ public class BoggleGame {
             String displayed_counter = "HINTS LEFT: " + (hint_count_display);
             String underscores = IntStream.range(0, hint.length() - 1).mapToObj(i ->"_").collect(Collectors.joining(""));
              displayed = "Try looking for a word starting with: " + hint.charAt(0) + underscores;
-            System.out.println(displayed + "\n" + displayed_counter);
-            System.out.println(hint);
+
             return displayed + "\n" + displayed_counter;}
 
         // temp error catcher
         else {
-            System.out.println("what happened");
+
             return "what happened";}
     }
 
