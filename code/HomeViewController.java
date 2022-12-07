@@ -23,9 +23,10 @@ public class HomeViewController {
     public void switchToBoardPage(ActionEvent actionEvent){
         try {
             boggleGame = updatedBoggleGame();
+            boggleGame.startGame();
             BoardView boardView = new BoardView(homeView, boggleGame);
             BoardViewController boardViewController = new BoardViewController(boardView);
-            boggleGame.startGame();
+
             boardView.registerMouseListener(boardViewController);
         }
         catch (Exception e) {
