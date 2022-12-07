@@ -130,12 +130,13 @@ public class BoggleStats {
      * Return End Game Stats
      */
     public String[] endGameStats(boolean isMultiplayer) {
-        String[] endStats = {"N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"};
+        String[] endStats = {"N/A", "N/A", "N/A", "N/A", "N/A", "N/A"};
         endStats[0] = "Player 1's score is " + player1Score;
         endStats[1] = "Player 2's score is " + player2Score;
         endStats[2] = "Player 1 found " + player1Words.size() + " words in the game";
         endStats[3] = "Player 2 found " + endStats[3] + " words in the game";
         endStats[4] = missing_words.size() + " words not found by the players";
+        endStats[5] = hintsCount + " hints used in the game";
         if (isMultiplayer) {
             endStats[1] = "Player 2's score is " + player2Score;
             endStats[3] = "Player 2 found " + player2Words.size() + " words in the game";

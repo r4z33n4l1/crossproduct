@@ -19,7 +19,7 @@ public class BoardViewController {
     public static void checkWord(ActionEvent actionEvent) {
         try {
 
-            String isValid = boardView.boggleGame.hMove(boardView.wordEntered.getText().toUpperCase());
+            String isValid = boardView.boggleGame.hMove(boardView.wordEntered.getText().toLowerCase());
 
             if (isValid.equals("Invalid Word")) {
                 boardView.isValidWord.setText("You added an invalid word." +"\n" + "    " +
@@ -45,6 +45,15 @@ public class BoardViewController {
             StatsView statsView = new StatsView(boardView.stage, boardView.boggleGame);
 //            StatsViewController statsViewController = new StatsViewController(statsView);
 //            statsView.registerMouseListener(statsViewController);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void getHint(ActionEvent actionEvent) {
+        try {
+            boardView.hintMessage.setText(boardView.boggleGame.hint_generator());
         }
         catch (Exception e) {
             e.printStackTrace();

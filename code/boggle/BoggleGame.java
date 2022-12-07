@@ -87,6 +87,7 @@ public class BoggleGame {
     public BoggleGame(GameModes mode, Themes theme, int size) {
         this.scanner = new Scanner(System.in);
         this.gameStats = BoggleStats.getInstance();
+        this.gameStats.resetStats();
         this.timer = new Timer();
         this.size = size;
         // GameModes

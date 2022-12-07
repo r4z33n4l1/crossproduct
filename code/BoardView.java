@@ -34,6 +34,10 @@ public class BoardView {
 
     private Button backButton;
 
+    private Button hintButton;
+
+    Label hintMessage;
+
 
     Label wordLabel;
 
@@ -122,8 +126,8 @@ public class BoardView {
                 "-fx-border-color: " + text_color +";");
         anchorPane1.getChildren().add(submitButton);
         Button endButton = new Button();
-        endButton.setLayoutX(25.0);
-        endButton.setLayoutY(271.0);
+        endButton.setLayoutX(22.0);
+        endButton.setLayoutY(298.0);
         endButton.setMnemonicParsing(false);
         endButton.setPrefHeight(27.0);
         endButton.setPrefWidth(91.0);
@@ -133,8 +137,8 @@ public class BoardView {
 
         anchorPane1.getChildren().add(endButton);
         Button backButton = new Button();
-        backButton.setLayoutX(146.0);
-        backButton.setLayoutY(271.0);
+        backButton.setLayoutX(143.0);
+        backButton.setLayoutY(298.0);
         backButton.setMnemonicParsing(false);
         backButton.setPrefHeight(27.0);
         backButton.setPrefWidth(91.0);
@@ -161,17 +165,21 @@ public class BoardView {
         hintButton.setStyle("-fx-background-color: " + button_color + "; -fx-text-fill: " + text_color + "; " +
                 "-fx-border-color: " + text_color +";");
         anchorPane1.getChildren().add(hintButton);
-        StackPane stackforhint = new StackPane();
-        stackforhint.setLayoutX(44.0);
-        stackforhint.setLayoutY(226.0);
-        stackforhint.setPrefHeight(17.0);
-        stackforhint.setPrefWidth(30.0);
+//        StackPane stackforhint = new StackPane();
+//        stackforhint.setLayoutX(3.0);
+//        stackforhint.setLayoutY(223.0);
+//        stackforhint.setPrefHeight(67.0);
+//        stackforhint.setPrefWidth(253.0);
         Label hintMessage = new Label();
+        hintMessage.setPrefWidth(240.0);
+        hintMessage.setPrefHeight(52.0);
+        hintMessage.setLayoutX(11.0);
+        hintMessage.setLayoutY(226.0);
 //        hintMessage.setLayoutX(109.0);
 //        hintMessage.setLayoutY(237.0);
         hintMessage.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
-        stackforhint.getChildren().add(hintMessage);
-        anchorPane1.getChildren().add(stackforhint);
+//        stackforhint.getChildren().add(hintMessage);
+        anchorPane1.getChildren().add(hintMessage);
         Label Keyboard_mapping = new Label();
         Keyboard_mapping.setLayoutX(68.0);
         Keyboard_mapping.setLayoutY(346.0);
@@ -234,11 +242,14 @@ public class BoardView {
         this.wordEntered = wordEntered;
         this.isValidWord = isValidWord;
         this.wordLabel = wordLabel;
+        this.hintButton = hintButton;
+        this.hintMessage = hintMessage;
     }
     public void registerMouseListener(BoardViewController boardController) {
         endButton.setOnAction(BoardViewController::showStatsPage);
         submitButton.setOnAction(BoardViewController::checkWord);
         backButton.setOnAction(BoardViewController::switchToHomePage);
+        hintButton.setOnAction(BoardViewController::getHint);
 
     }
 }
