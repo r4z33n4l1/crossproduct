@@ -59,7 +59,6 @@ public class BoggleGame {
 
     public enum GameModes {
         PRACTICE,
-        SINGLEPLAYER,
         MULTIPLAYER
     }
 
@@ -93,8 +92,6 @@ public class BoggleGame {
         // GameModes
         if (mode == GameModes.PRACTICE) {
             this.gameMode = new PracticeMode(gameStats);
-        } else if (mode == GameModes.SINGLEPLAYER) {
-            this.gameMode = new SingleplayerMode(gameStats);
         } else if (mode == GameModes.MULTIPLAYER) {
             this.gameMode = new MultiplayerMode(gameStats);
         }
