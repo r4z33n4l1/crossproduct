@@ -406,7 +406,7 @@ public class BoggleGame {
             int hint_count_display = hint_limit - gameStats.GetHintCount();
             String displayed_counter = "HINTS LEFT: " + (hint_count_display);
 
-            String underscores = IntStream.range(0, hint.length() - 1).mapToObj(i ->"_").collect(Collectors.joining(""));
+            String underscores = IntStream.range(0, hint.length() - 1).mapToObj(i ->"▢").collect(Collectors.joining(""));
             displayed = "Try looking for a word starting with: " + hint.charAt(0) + underscores;
 
             return displayed + "\n" + displayed_counter;
@@ -419,7 +419,7 @@ public class BoggleGame {
             int hint_count_display = hint_limit - gameStats.GetHintCount();
             String displayed_counter = "HINTS LEFT: " + (hint_count_display);
 
-            String underscores = IntStream.range(0, hint.length() - index_tracker).mapToObj(i -> "_").collect(Collectors.joining(""));
+            String underscores = IntStream.range(0, hint.length() - index_tracker).mapToObj(i -> "▢").collect(Collectors.joining(""));
             displayed = "Try looking for a word starting with: " + hint.substring(0, index_tracker) + underscores;
 
 
@@ -443,7 +443,7 @@ public class BoggleGame {
             gameStats.setHintCount(gameStats.GetHintCount() + 1);
             int hint_count_display = hint_limit - gameStats.GetHintCount();
             String displayed_counter = "HINTS LEFT: " + (hint_count_display);
-            String underscores = IntStream.range(0, hint.length() - 1).mapToObj(i ->"_").collect(Collectors.joining(""));
+            String underscores = IntStream.range(0, hint.length() - 1).mapToObj(i ->"▢").collect(Collectors.joining(""));
              displayed = "Try looking for a word starting with: " + hint.charAt(0) + underscores;
 
             return displayed + "\n" + displayed_counter;}
