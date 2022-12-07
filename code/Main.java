@@ -16,10 +16,10 @@ public class Main extends Application {
      HomeView homeView;
      BoggleGame boggleGame;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
+//    public static void main(String[] args) {
+//        launch(args);
+//    }
+//
     @Override
     public void start(Stage stage) throws Exception {
         homeView = new HomeView(stage);
@@ -32,10 +32,10 @@ public class Main extends Application {
     /// Comment out launch(args) and uncomment the following code to test the terminal version of the game.
     /// You can also change the parameters of the BoggleGame constructor to test different game modes and themes.
 
-//    public static void main(String[] args) {
-//        BoggleGame boggleGame = new BoggleGame(BoggleGame.GameModes.PRACTICE, BoggleGame.Themes.DEFAULT, 4);
-//        boggleGame.startGame();
-//        boggleGame.hMoveTEST();
-//    }
+    public static void main(String[] args) {
+        BoggleGame boggleGame = new BoggleGame(BoggleGame.GameModes.MULTIPLAYER, BoggleGame.Themes.DEFAULT, 4);
+        boggleGame.startGame();
+        boggleGame.hMoveTEST();
+    }
 
 }

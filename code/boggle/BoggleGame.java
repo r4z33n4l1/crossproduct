@@ -4,6 +4,7 @@ import boggle.stats.BoggleStats;
 import themes.*;
 
 import java.util.*;
+import java.util.stream.*;
 
 
 /**
@@ -72,10 +73,10 @@ public class BoggleGame {
     /**
      * Carina's hint stuff (don't touch)
      */
-    int inner_counter = 0;
+    int index_tracker = 0;
     String hint = "";
-    // int hint_len = 0;
-    int outer_counter = 0;
+    String displayed = "";
+//    int proper_hint_count = 0;
 
     int size;
 
@@ -343,68 +344,118 @@ public class BoggleGame {
      * A function that somewhat deals with the hints' algorithm
      *  - Only human players can call for hints
      */
-    public void hint_generator() {
+    public String hint_generator() {
 
-        /// Different modes? How to differentiate which player ran out of hints. confusion
-        /// Does it reset every new game -> (outer loop doesn't reset if u keep playing again rn)
-        /// Atm the algorithm is global cause both players are using the same screen: need to decide on hint limit per player or global game
+        index_tracker ++;
 
-        inner_counter ++;
+        int hint_limit = 12;
+
 
         Set<String> words_not_found = gameStats.getWordsNotFound();
         ArrayList<String> copy_words_not_found = new ArrayList<>(words_not_found);
 
-        // No words available, return
+
+        // No words available
         if (copy_words_not_found.size() == 0){
-            inner_counter = 0;
-            System.out.println("All words have been found!");}
+            index_tracker = 0;
+
+            int hint_count_display = hint_limit - gameStats.GetHintCount();
+
+            String displayed_counter = "HINTS LEFT: " + (hint_count_display);
+            String hint_return = "All words have been found!";
+
+            System.out.println(hint_return + "\n" + displayed_counter);
+
+            return hint_return + "\n" + displayed_counter;
+        }
 
         // No hints left
-        else if (outer_counter >= 3 && !copy_words_not_found.contains(hint)){
-            System.out.println("Not so fast! You ran out of hints :(");}
+        else if (gameStats.GetHintCount() >= hint_limit && !copy_words_not_found.contains(hint)){
 
-        // Words available; New word is generated; First index returned
-        else if (inner_counter == 1 || (Objects.equals(hint, ""))){
+            int hint_count_display = hint_limit - gameStats.GetHintCount();
+
+            String displayed_counter = "HINTS LEFT: " + (hint_count_display);
+            String hint_return = "Not so fast! You have used up all your hints!";
+
+            System.out.println(hint_return + "\n" + displayed_counter);
+
+            return hint_return + "\n" + displayed_counter;
+        }
+
+        // No hints left but still not guessed
+        else if (gameStats.GetHintCount() >= hint_limit && copy_words_not_found.contains(hint)){
+
+            int hint_count_display = hint_limit - gameStats.GetHintCount();
+            String displayed_counter = "HINTS LEFT: " + (hint_count_display);
+
+            System.out.println(displayed + "\n" + displayed_counter);
+            System.out.println(hint);
+
+            return displayed + "\n" + displayed_counter;
+        }
+
+        // Words available; New word is generated; First index returned + underscores
+        else if (index_tracker == 1 || (Objects.equals(hint, ""))){
             hint = hint_randomizer(copy_words_not_found);
-            System.out.println("Try looking for a word starting with: " + hint.charAt(0));}
+            gameStats.setHintCount(gameStats.GetHintCount() + 1);
 
-        // Words available; Counter within index (full word not revealed); Previous word not found yet; Slice returned
-        else if (inner_counter < hint.length() && inner_counter > 1 && copy_words_not_found.contains(hint)) {
-            System.out.println("Try looking for a word starting with: " + hint.substring(0, inner_counter));}
+            int hint_count_display = hint_limit - gameStats.GetHintCount();
+            String displayed_counter = "HINTS LEFT: " + (hint_count_display);
 
-        // ^ Same thing, but full word revealed now
-        else if (inner_counter == hint.length() && inner_counter > 1 && copy_words_not_found.contains(hint)) {
-            outer_counter ++;
-//            inner_counter = 0;
-            int left = 3 - outer_counter;
-            System.out.println("You have " + left + " reveal(s) left. Use them wisely! \n Find the word: " + hint);}
+            String underscores = IntStream.range(0, hint.length() - 1).mapToObj(i ->"_").collect(Collectors.joining(""));
+            displayed = "Try looking for a word starting with: " + hint.charAt(0) + underscores;
+            System.out.println(displayed + "\n" + displayed_counter);
+            System.out.println(hint);
 
-        // ^ Same thing, if still not found (looping heh)
-        else if (inner_counter > hint.length() && copy_words_not_found.contains(hint)) {
-//            inner_counter = 0;
-            int left = 3 - outer_counter;
-            System.out.println("You have " + left + " reveal(s) left. Use them wisely! \n Find the word: " + hint);}
+            return displayed + "\n" + displayed_counter;
+        }
+
+        // Words available; Counter within index; Previous word not found yet; Slice returned or first index
+        else if (index_tracker <= hint.length() && index_tracker >= 1 && copy_words_not_found.contains(hint)) {
+            gameStats.setHintCount(gameStats.GetHintCount() + 1);
+
+            int hint_count_display = hint_limit - gameStats.GetHintCount();
+            String displayed_counter = "HINTS LEFT: " + (hint_count_display);
+
+            String underscores = IntStream.range(0, hint.length() - index_tracker).mapToObj(i -> "_").collect(Collectors.joining(""));
+            displayed = "Try looking for a word starting with: " + hint.substring(0, index_tracker) + underscores;
+
+            System.out.println(displayed + "\n" + displayed_counter);
+            System.out.println(hint);
+            System.out.println(index_tracker + " index tracker");
+
+            return displayed + "\n" + displayed_counter;
+        }
+
+        // They can't guess word after fully displayed
+        else if (index_tracker > hint.length() && copy_words_not_found.contains(hint)) {
+             displayed = "Find the word: " + hint;
+            int hint_count_display = hint_limit - gameStats.GetHintCount();
+            String displayed_counter = "HINTS LEFT: " + (hint_count_display);
+            System.out.println(displayed + "\n" + displayed_counter);
+            System.out.println(hint);
+            System.out.println(index_tracker + " index tracker");
+            return displayed + "\n" + displayed_counter;
+        }
 
         // Finally found, so reset to first index
-        else if (inner_counter >= hint.length() && !copy_words_not_found.contains(hint)) {
-//            inner_counter = 0;
-            hint = hint_randomizer(copy_words_not_found);
-            inner_counter = 1;
-            System.out.println("Try looking for a word starting with: " + hint.charAt(0));}
-
         // Words available; Counter within index (full word not revealed); Previous word HAS BEEN FOUND; New word index returned
-        else if (inner_counter < hint.length() && inner_counter > 1 && !copy_words_not_found.contains(hint)) {
+        else if (index_tracker > 1 && !copy_words_not_found.contains(hint)) {
             hint = hint_randomizer(copy_words_not_found);
-            inner_counter = 1;
-            System.out.println("Try looking for a word starting with: " + hint.charAt(0));}
+            index_tracker = 1;
+            gameStats.setHintCount(gameStats.GetHintCount() + 1);
+            int hint_count_display = hint_limit - gameStats.GetHintCount();
+            String displayed_counter = "HINTS LEFT: " + (hint_count_display);
+            String underscores = IntStream.range(0, hint.length() - 1).mapToObj(i ->"_").collect(Collectors.joining(""));
+             displayed = "Try looking for a word starting with: " + hint.charAt(0) + underscores;
+            System.out.println(displayed + "\n" + displayed_counter);
+            System.out.println(hint);
+            return displayed + "\n" + displayed_counter;}
 
         // temp error catcher
         else {
-            System.out.println("what happened");}
-
-//        for (String word: allWords.keySet()){
-//            System.out.println(word);}
-
+            System.out.println("what happened");
+            return "what happened";}
     }
 
 
