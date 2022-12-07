@@ -246,6 +246,9 @@ public class BoardView {
         scene.getAccelerators().put(new KeyCodeCombination(KeyCode.DIGIT4, KeyCombination.CONTROL_DOWN), backButton::fire);
         endButton.setMnemonicParsing(true);
         scene.getAccelerators().put(new KeyCodeCombination(KeyCode.DIGIT3, KeyCombination.CONTROL_DOWN), endButton::fire);
+        hintButton.setMnemonicParsing(true);
+        scene.getAccelerators().put(new KeyCodeCombination(KeyCode.DIGIT2, KeyCombination.CONTROL_DOWN), hintButton::fire);
+
         this.endButton = endButton;
         this.wordEntered = wordEntered;
         this.isValidWord = isValidWord;
