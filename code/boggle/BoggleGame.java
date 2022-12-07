@@ -125,10 +125,14 @@ public class BoggleGame {
         while (allWords.size() < 5){
             this.allWords = new HashMap<>();
             this.dices = this.gameTheme.getDices();
+            System.out.println(this.dices);
             this.grid = new BoggleGrid(this.size);
             this.grid.initializeBoard(randomizeLetters(this.size));
             findAllWords(this.allWords, boggleDict, this.grid);
             //System.out.println("All wordsize: " + this.allWords.size());
+        }
+        for (String word: this.allWords.keySet()) {
+            gameStats.setWordsNotFound(word);
         }
 //            findAllWords(this.allWords, boggleDict, this.grid);
     }
@@ -202,7 +206,7 @@ public class BoggleGame {
                 WordsHelper(allWords, boggleDict, boggleGrid, position_list, i, j, current_word, visited);
             }
         }
-        //System.out.println("All wordsize: " + allWords);
+        System.out.println(allWords.keySet());
     }
     /*
      * A recursive helper method that given indexes i,j finds the neighbouring positions
@@ -228,7 +232,7 @@ public class BoggleGame {
         if (position_list.size() >= 4) {
             if (boggleDict.containsWord(word)) {
                 list_of_words.put(word, position_list);
-                gameStats.setWordsNotFound(word);
+               // gameStats.setWordsNotFound(word);
             }
         }
         // if word is a prefix, check neighbouring values and find valid words recursively
