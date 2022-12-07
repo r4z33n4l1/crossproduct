@@ -72,19 +72,11 @@ public class StatsView {
         label5.setLayoutY(221.0);
         label5.setFont(Font.font("System", FontWeight.BOLD, 18.0));
         label5.setText(stats[5]);
-
-// Adding child to parent
         anchorPane0.getChildren().add(label5);
-        Label label6 = new Label();
-        label6.setPrefHeight(17.0);
-        label6.setPrefWidth(349.0);
-        label6.setLayoutX(61.0);
-        label6.setLayoutY(256.0);
-        label6.setFont(Font.font("System", FontWeight.BOLD, 18.0));
-        label6.setText(stats[6]);
 
 // Adding child to parent
-        anchorPane0.getChildren().add(label6);
+
+// Adding child to parent
         Label label7 = new Label();
         label7.setPrefHeight(17.0);
         label7.setPrefWidth(349.0);
