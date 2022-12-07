@@ -38,7 +38,7 @@ public class MultiplayerMode extends GameMode {
             gameStats.addWord(s, BoggleStats.Player.Player1);
         }
 
-        return "Word Added";
+        return "☑ Word Added";
     }
 
     /**

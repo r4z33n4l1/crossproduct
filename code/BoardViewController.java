@@ -23,16 +23,16 @@ public class BoardViewController {
 
             if (isValid.equals("Invalid Word")) {
                 boardView.isValidWord.setText("You added an invalid word." +"\n" + "    " +
-                        "   Please try again.");
+                        "  ☹ Please try again.");
             }
             else if(isValid.equals("Word Already Found")){
                 boardView.isValidWord.setText("You already found this word." +"\n" + "    " +
-                        "   Please try again.");
+                        "  ☹ Please try again.");
             }
             else{
                 boardView.isValidWord.setText(isValid);
             }
-            boardView.wordLabel.setText(boardView.boggleGame.getDisplayString() + "enter word below:");
+            boardView.wordLabel.setText(boardView.boggleGame.getDisplayString() + " -- enter word below ↓");
             boardView.wordEntered.setText("");
         }
         catch (Exception e) {
