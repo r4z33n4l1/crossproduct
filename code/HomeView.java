@@ -18,10 +18,8 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class HomeView{
-    //    BoggleGame boggleGame;
     Stage stage;
 
     private AnchorPane root;
@@ -29,7 +27,6 @@ public class HomeView{
     ComboBox<String> board_colors;
     ComboBox<String> mode_menu;
     ComboBox<String> theme_menu;
-    private Slider time_slider;
     private Button start_button;
 
     HashMap color_mapping;
@@ -44,25 +41,26 @@ public class HomeView{
     ObservableList<String> theme_options =
             FXCollections.observableArrayList(
                     "Default",
-                    "Pokemon",
+                    "Cities",
                     "Animals",
-                    "Cities"
+                    "Pokemon"
             );
     ObservableList<String> board_options =
             FXCollections.observableArrayList(
-                    "4x4",
-                    "5x5",
-                    "6x6",
-                    "7x7",
-                    "8x8"
+                    "4x4 (Easy)",
+                    "5x5 (Medium)",
+                    "6x6 (Hard)",
+                    "7x7 (Pro)",
+                    "8x8 (Insane)"
             );
     ObservableList<String> colors_list =
             FXCollections.observableArrayList(
                     "Default",
                     "Light Mode",
-                    "Dark mode",
-                    "Purple",
-                    "Green Blue"
+                    "Dark Mode",
+                    "Blue-White (Cities)",
+                    "Green-Blue (Animals)",
+                    "Yellow-Black (Pokemon)"
             );
     ObservableList<String> modes_list =
             FXCollections.observableArrayList(
@@ -76,36 +74,42 @@ public class HomeView{
         HashMap<String, String> mode_mapping = new HashMap<String, String>();
         mode_mapping.put("Practice", "PRACTICE");
         mode_mapping.put("Player vs Player", "MULTIPLAYER");
-        board_size_mapping.put("4x4", 4);
-        board_size_mapping.put("5x5", 5);
-        board_size_mapping.put("6x6", 6);
-        board_size_mapping.put("7x7", 7);
-        board_size_mapping.put("8x8", 8);
+        board_size_mapping.put("4x4 (Easy)", 4);
+        board_size_mapping.put("5x5 (Medium)", 5);
+        board_size_mapping.put("6x6 (Hard)", 6);
+        board_size_mapping.put("7x7 (Pro)", 7);
+        board_size_mapping.put("8x8 (Insane)", 8);
         color_mapping.put("Default", new ArrayList<>() {{
-            add("#FFFFFF");
-            add("#000000");
-            add("#FFFFFF");
+            add("#FFFFFF"); // background
+            add("#000000"); // text
+            add("#FFFFFF"); // button
         }});
         color_mapping.put("Light Mode", new ArrayList<>() {{
             add("#FFFFFF");
             add("#000000");
             add("#0DB14B");
         }});
-        color_mapping.put("Dark mode", new ArrayList<>() {{
+        color_mapping.put("Dark Mode", new ArrayList<>() {{
             add("#000000");
             add("#FFFFFF");
             add("#6E005F");
         }});
-        color_mapping.put("Purple", new ArrayList<>() {{
-            add("#6E005F");
+        color_mapping.put("Blue-White (Cities)", new ArrayList<>() {{
+            add("#008183");
             add("#FFFFFF");
-            add("#FF5733");
+            add("#535054");
         }});
-        color_mapping.put("Green Blue", new ArrayList<>() {{
+        color_mapping.put("Green-Blue (Animals)", new ArrayList<>() {{
             add("#18453B");
             add("#FFFFFF");
             add("#FF5733");
         }});
+        color_mapping.put("Yellow-Black (Pokemon)", new ArrayList<>() {{
+            add("#D1DE3F");
+            add("#000000");
+            add("#C89A58");
+        }});
+
 //        color_mapping.put("Default", new ArrayList<>(List.of("#000000", "#FFFFFF")));
 //        color_mapping.put("Dark mode", new ArrayList<>(List.of("#FFFFFF", "#000000")));
 //        color_mapping.put("Dark Blue", new ArrayList<>(List.of("#191970", "#FFFFFF")));
@@ -120,21 +124,21 @@ public class HomeView{
         themeChoice.setLayoutX(107.0);
         themeChoice.setFont(Font.font("Verdana", FontWeight.BOLD, 18.0));
         themeChoice.setLayoutY(73.0);
-        themeChoice.setText("Choose your Theme:");
+        themeChoice.setText("☻ Choose your Theme:");
 
 // Adding child to parent
         anchorPane0.getChildren().add(themeChoice);
         Label boardChoice = new Label();
         boardChoice.setLayoutX(106.0);
         boardChoice.setLayoutY(129.0);
-        boardChoice.setText("Choose your Board Size:");
+        boardChoice.setText("▓ Choose your Board Size:");
 
 // Adding child to parent
         anchorPane0.getChildren().add(boardChoice);
         Label modeChoice = new Label();
         modeChoice.setLayoutX(107.0);
         modeChoice.setLayoutY(240.0);
-        modeChoice.setText("Choose your Mode to Play:");
+        modeChoice.setText("⁇ Choose your Mode to Play:");
 
 // Adding child to parent
         anchorPane0.getChildren().add(modeChoice);
@@ -195,7 +199,7 @@ public class HomeView{
         Label boardColor = new Label();
         boardColor.setLayoutX(106.0);
         boardColor.setLayoutY(185.0);
-        boardColor.setText("Choose your Board Color:");
+        boardColor.setText("✎ Choose your Board Color:");
 
 // Adding child to parent
         anchorPane0.getChildren().add(boardColor);
@@ -246,7 +250,7 @@ public class HomeView{
         Label nextValueMapping = new Label();
         nextValueMapping.setLayoutX(200.0);
         nextValueMapping.setLayoutY(439.0);
-        nextValueMapping.setText("Down: Move to next value in ComboBox");
+        nextValueMapping.setText("Down: Move to Next Item in Drop Menu");
         nextValueMapping.setFont(Font.font("Regular System", 14.0));
         nextValueMapping.setPrefHeight(17.0);
         nextValueMapping.setPrefWidth(265.0);

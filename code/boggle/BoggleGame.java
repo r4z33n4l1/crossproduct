@@ -428,7 +428,7 @@ public class BoggleGame {
 
         // They can't guess word after fully displayed
         else if (index_tracker > hint.length() && copy_words_not_found.contains(hint)) {
-             displayed = "Find the word: " + hint;
+             displayed = "Find the Word: " + hint;
             int hint_count_display = hint_limit - gameStats.GetHintCount();
             String displayed_counter = "HINTS LEFT: " + (hint_count_display);
 

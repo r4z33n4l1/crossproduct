@@ -30,7 +30,7 @@ public class PracticeMode extends GameMode {
             return "Word Too Short";
         }
         gameStats.addWord(s, BoggleStats.Player.Player1);
-        return "Word Added";
+        return "☑ Word Added";
     }
 
     /**

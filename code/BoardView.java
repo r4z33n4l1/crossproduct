@@ -105,7 +105,7 @@ public class BoardView {
         wordLabel.setLayoutX(26.0);
         wordLabel.setLayoutY(14.0);
         wordLabel.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
-        wordLabel.setText(boggleGame.getDisplayString()+ "enter word below:");
+        wordLabel.setText(boggleGame.getDisplayString()+ "-- enter word below ↓");
         wordLabel.setFont(Font.font("System", FontWeight.BOLD, 18.0));
         anchorPane1.getChildren().add(wordLabel);
         TextField wordEntered = new TextField();
@@ -150,7 +150,7 @@ public class BoardView {
         backButton.setMnemonicParsing(false);
         backButton.setPrefHeight(27.0);
         backButton.setPrefWidth(91.0);
-        backButton.setText("Back to home");
+        backButton.setText("Home");
         backButton.setStyle("-fx-background-color: " + button_color + "; -fx-text-fill: " + text_color + "; " +
                 "-fx-border-color: " + text_color +";");
         anchorPane1.getChildren().add(backButton);
@@ -169,7 +169,7 @@ public class BoardView {
         hintButton.setMnemonicParsing(false);
         hintButton.setPrefHeight(27.0);
         hintButton.setPrefWidth(120.0);
-        hintButton.setText("Get Hint");
+        hintButton.setText("Hint");
         hintButton.setStyle("-fx-background-color: " + button_color + "; -fx-text-fill: " + text_color + "; " +
                 "-fx-border-color: " + text_color +";");
         anchorPane1.getChildren().add(hintButton);
