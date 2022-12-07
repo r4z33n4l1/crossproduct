@@ -18,6 +18,7 @@ public class BoardViewController {
 
     public static void checkWord(ActionEvent actionEvent) {
         try {
+
             String isValid = boardView.boggleGame.hMove(boardView.wordEntered.getText().toUpperCase());
 
             if (isValid.equals("Invalid Word")) {
@@ -31,6 +32,8 @@ public class BoardViewController {
             else{
                 boardView.isValidWord.setText(isValid);
             }
+            boardView.wordLabel.setText(boardView.boggleGame.getDisplayString() + "enter word below:");
+            boardView.wordEntered.setText("");
         }
         catch (Exception e) {
             e.printStackTrace();

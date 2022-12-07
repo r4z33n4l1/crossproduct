@@ -65,6 +65,6 @@ public class SingleplayerMode extends GameMode {
      */
     @Override
     public String getDisplayString() {
-        return "P1 vs P1 haha. Not funny? I know :/";
+        return"";
     }
 }
