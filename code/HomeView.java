@@ -7,22 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
-//import javafx.scene.text.Text;
-//import javax.swing.*;
-//import java.awt.Toolkit;
-//import java.awt.Font;
-//import java.awt.GraphicsEnvironment;
-//import java.io.FileInputStream;
-//import java.io.IOException;
-//import java.awt.FontFormatException;
-//
-import java.awt.*;
-import java.io.File;
+import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -225,6 +217,38 @@ public class HomeView{
                 button.setStyle("-fx-font-size: 14");
             }
         }
+        Label KeyboardMapping = new Label();
+        KeyboardMapping.setLayoutX(245.0);
+        KeyboardMapping.setLayoutY(366.0);
+        KeyboardMapping.setText("Keyboard Mapping");
+        KeyboardMapping.setFont(Font.font("Regular System", FontWeight.BOLD, 18.0));
+        KeyboardMapping.setPrefHeight(20.0);
+        KeyboardMapping.setPrefWidth(170.0);
+        anchorPane0.getChildren().add(KeyboardMapping);
+        Label submitMapping = new Label();
+        submitMapping.setLayoutX(260.0);
+        submitMapping.setLayoutY(396.0);
+        submitMapping.setText("Ctrl+1: Start Game");
+        submitMapping.setFont(Font.font("Regular System", 14.0));
+        submitMapping.setPrefHeight(17.0);
+        submitMapping.setPrefWidth(120.0);
+        anchorPane0.getChildren().add(submitMapping);
+        Label nextMapping = new Label();
+        nextMapping.setLayoutX(260.0);
+        nextMapping.setLayoutY(418.0);
+        nextMapping.setText("Tab: Shift to Next Item");
+        nextMapping.setFont(Font.font("Regular System", 14.0));
+        nextMapping.setPrefHeight(17.0);
+        nextMapping.setPrefWidth(170.0);
+        anchorPane0.getChildren().add(nextMapping);
+        Label nextValueMapping = new Label();
+        nextValueMapping.setLayoutX(200.0);
+        nextValueMapping.setLayoutY(439.0);
+        nextValueMapping.setText("Down: Move to next value in ComboBox");
+        nextValueMapping.setFont(Font.font("Regular System", 14.0));
+        nextValueMapping.setPrefHeight(17.0);
+        nextValueMapping.setPrefWidth(265.0);
+        anchorPane0.getChildren().add(nextValueMapping);
         this.root = anchorPane0;
         this.theme_menu = theme_menu;
         this.board_menu = board_menu;
@@ -235,9 +259,12 @@ public class HomeView{
         this.color_mapping = color_mapping;
         this.board_size_mapping = board_size_mapping;
         this.mode_mapping = mode_mapping;
+        Scene scene = new Scene(anchorPane0);
         stage.setTitle("Boggle Game");
-        stage.setScene(new Scene(anchorPane0));
+        stage.setScene(scene);
         stage.show();
+        // map start_button to key 1
+        scene.getAccelerators().put(new KeyCodeCombination(KeyCode.DIGIT1, KeyCombination.CONTROL_DOWN), startButton::fire);
     }
     public void registerMouseListener(HomeViewController homeViewController) {
         start_button.setOnAction(homeViewController::switchToBoardPage);

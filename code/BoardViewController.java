@@ -36,4 +36,15 @@ public class BoardViewController {
             e.printStackTrace();
         }
     }
+
+    public static void showStatsPage(ActionEvent actionEvent) {
+        try {
+            StatsView statsView = new StatsView(boardView.stage, boardView.boggleGame);
+//            StatsViewController statsViewController = new StatsViewController(statsView);
+//            statsView.registerMouseListener(statsViewController);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

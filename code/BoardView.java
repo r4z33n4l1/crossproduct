@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -60,8 +62,8 @@ public class BoardView {
 //        System.out.println(button_color);
 
         SplitPane splitPane0 = new SplitPane();
-        splitPane0.setPrefHeight(439.0);
-        splitPane0.setPrefWidth(625.0);
+        splitPane0.setPrefHeight(519.0);
+        splitPane0.setPrefWidth(663.0);
         splitPane0.setDividerPositions(0.6);
         //make the divider transparent
         AnchorPane anchorPane0 = new AnchorPane();
@@ -76,30 +78,39 @@ public class BoardView {
         stackPane0.setMouseTransparent(true);
         Label boggleboardDisplay = new Label();
         boggleboardDisplay.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
-        boggleboardDisplay.setFont(Font.font("System", FontWeight.BOLD, 35.0)); // carina fonts
+        boggleboardDisplay.setFont(Font.font("System", FontWeight.BOLD, 35.0));
         stackPane0.getChildren().add(boggleboardDisplay);
         anchorPane0.getChildren().add(stackPane0);
         splitPane0.getItems().add(anchorPane0);
         AnchorPane anchorPane1 = new AnchorPane();
-        anchorPane1.setPrefHeight(437.0);
-        anchorPane1.setPrefWidth(275.0);
+        anchorPane1.setPrefHeight(467.0);
+        anchorPane1.setPrefWidth(271.0);
         anchorPane1.setStyle("-fx-background-color: " + background_color + ";");
         Label wordLabel = new Label();
-        wordLabel.setLayoutX(17.0);
+        wordLabel.setLayoutX(26.0);
         wordLabel.setLayoutY(14.0);
         wordLabel.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
         wordLabel.setText("Enter word found below:");
         wordLabel.setFont(Font.font("System", FontWeight.BOLD, 18.0));
         anchorPane1.getChildren().add(wordLabel);
         TextField wordEntered = new TextField();
-        wordEntered.setLayoutX(17.0);
-        wordEntered.setLayoutY(59.0);
+        //Allow only letters to be entered
+        wordEntered.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (!event.getCharacter().matches("[a-zA-Z]")) {
+                    event.consume();
+                }
+            }
+        });
+        wordEntered.setLayoutX(25.0);
+        wordEntered.setLayoutY(50.0);
         wordEntered.setPrefHeight(27.0);
         wordEntered.setPrefWidth(211.0);
         anchorPane1.getChildren().add(wordEntered);
         Button submitButton = new Button();
         submitButton.setLayoutX(63.0);
-        submitButton.setLayoutY(101.0);
+        submitButton.setLayoutY(98.0);
         submitButton.setMnemonicParsing(false);
         submitButton.setPrefHeight(27.0);
         submitButton.setPrefWidth(120.0);
@@ -108,22 +119,22 @@ public class BoardView {
                 "-fx-border-color: " + text_color +";");
         anchorPane1.getChildren().add(submitButton);
         Button endButton = new Button();
-        endButton.setLayoutX(63.0);
+        endButton.setLayoutX(25.0);
         endButton.setLayoutY(271.0);
         endButton.setMnemonicParsing(false);
         endButton.setPrefHeight(27.0);
-        endButton.setPrefWidth(120.0);
+        endButton.setPrefWidth(91.0);
         endButton.setStyle("-fx-background-color: " + button_color + "; -fx-text-fill: " + text_color + "; " +
                 "-fx-border-color: " + text_color +";");
         endButton.setText("End Game");
 
         anchorPane1.getChildren().add(endButton);
         Button backButton = new Button();
-        backButton.setLayoutX(63.0);
-        backButton.setLayoutY(363.0);
+        backButton.setLayoutX(146.0);
+        backButton.setLayoutY(271.0);
         backButton.setMnemonicParsing(false);
         backButton.setPrefHeight(27.0);
-        backButton.setPrefWidth(120.0);
+        backButton.setPrefWidth(91.0);
         backButton.setText("Back to home");
         backButton.setStyle("-fx-background-color: " + button_color + "; -fx-text-fill: " + text_color + "; " +
                 "-fx-border-color: " + text_color +";");
@@ -161,6 +172,46 @@ public class BoardView {
         hintMessage.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
         stackforhint.getChildren().add(hintMessage);
         anchorPane1.getChildren().add(stackforhint);
+        Label Keyboard_mapping = new Label();
+        Keyboard_mapping.setLayoutX(68.0);
+        Keyboard_mapping.setLayoutY(346.0);
+        Keyboard_mapping.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
+        Keyboard_mapping.setText("Keyboard Mapping");
+        Keyboard_mapping.setFont(Font.font("System", FontWeight.BOLD, 14.0));
+        Keyboard_mapping.setPrefHeight(20.0);
+        Keyboard_mapping.setPrefWidth(135.0);
+        anchorPane1.getChildren().add(Keyboard_mapping);
+        Label submit_mapping = new Label();
+        submit_mapping.setLayoutX(69.0);
+        submit_mapping.setLayoutY(379.0);
+        submit_mapping.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
+        submit_mapping.setText("Ctrl+1: Submit Word");
+        submit_mapping.setPrefHeight(17.0);
+        submit_mapping.setPrefWidth(120.0);
+        anchorPane1.getChildren().add(submit_mapping);
+        Label hint_mapping = new Label();
+        hint_mapping.setLayoutX(68.0);
+        hint_mapping.setLayoutY(404.0);
+        hint_mapping.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
+        hint_mapping.setText("Ctrl+2: Get Hint");
+        hint_mapping.setPrefHeight(17.0);
+        hint_mapping.setPrefWidth(135.0);
+        anchorPane1.getChildren().add(hint_mapping);
+        Label end_mapping = new Label();
+        end_mapping.setLayoutX(69.0);
+        end_mapping.setLayoutY(431.0);
+        end_mapping.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
+        end_mapping.setText("Ctrl+3: End Game");
+        end_mapping.setPrefHeight(17.0);
+        end_mapping.setPrefWidth(120.0);
+        anchorPane1.getChildren().add(end_mapping);
+        Label back_mapping = new Label();
+        back_mapping.setLayoutX(70.0);
+        back_mapping.setLayoutY(458.0);
+        back_mapping.setStyle("-fx-background-color: " + background_color + "; -fx-text-fill: " + text_color + ";");
+        back_mapping.setText("Ctrl+4: Back to Home");
+        back_mapping.setPrefHeight(17.0);
+        back_mapping.setPrefWidth(120.0);
         BoggleGrid boggleGrid = boggleGame.getGrid();
         String boggleBoard = boggleGrid.toString();
         boggleboardDisplay.setText(boggleBoard);
@@ -172,33 +223,48 @@ public class BoardView {
 
         this.backButton = backButton;
         this.submitButton = submitButton;
-        // map submitbutton to key F and backbutton to key B
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.F1) {
-                    submitButton.fire();
-                }
-                if (event.getCode() == KeyCode.F2) {
-                    backButton.fire();
-                }
-            }
-        });
+        // map submitbutton to key control+1 and backbutton to key control+4
+        submitButton.setMnemonicParsing(true);
+        scene.getAccelerators().put(new KeyCodeCombination(KeyCode.DIGIT1, KeyCombination.CONTROL_DOWN), submitButton::fire);
+        backButton.setMnemonicParsing(true);
+        scene.getAccelerators().put(new KeyCodeCombination(KeyCode.DIGIT4, KeyCombination.CONTROL_DOWN), backButton::fire);
+//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                if (event.getCode() == KeyCode.DIGIT1) {
+//                    submitButton.fire();
+//                }
+//                if (event.getCode() == KeyCode.DIGIT4) {
+//                    backButton.fire();
+//                }
+//            }
+//        });
+//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                if (event.getCode() == KeyCode.1) {
+//                    submitButton.fire();
+//                }
+//                if (event.getCode() == KeyCode.F2) {
+//                    backButton.fire();
+//                }
+//            }
+//        });
         this.endButton = endButton;
         this.wordEntered = wordEntered;
         this.isValidWord = isValidWord;
     }
     public void registerMouseListener(BoardViewController boardController) {
-//        endButton.setOnAction(BoardViewController::showStatsPage);
+        endButton.setOnAction(BoardViewController::showStatsPage);
         submitButton.setOnAction(BoardViewController::checkWord);
         backButton.setOnAction(BoardViewController::switchToHomePage);
 
     }
-    public void registerKeyListener(BoardViewController boardController) {
-        submitButton.setOnKeyPressed(event -> {
-            if (event.getCode().equals(KeyCode.ENTER)) {
-                submitButton.fire();
-            }
-        });
-    }
+//    public void registerKeyListener(BoardViewController boardController) {
+//        submitButton.setOnKeyPressed(event -> {
+//            if (event.getCode().equals(KeyCode.ENTER)) {
+//                submitButton.fire();
+//            }
+//        });
+//    }
 }
