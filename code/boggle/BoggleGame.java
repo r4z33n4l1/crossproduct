@@ -125,7 +125,7 @@ public class BoggleGame {
         while (allWords.size() < 5){
             this.allWords = new HashMap<>();
             this.dices = this.gameTheme.getDices();
-            System.out.println(this.dices);
+            //System.out.println(this.dices);
             this.grid = new BoggleGrid(this.size);
             this.grid.initializeBoard(randomizeLetters(this.size));
             findAllWords(this.allWords, boggleDict, this.grid);
@@ -206,7 +206,7 @@ public class BoggleGame {
                 WordsHelper(allWords, boggleDict, boggleGrid, position_list, i, j, current_word, visited);
             }
         }
-        System.out.println(allWords.keySet());
+        //System.out.println(allWords.keySet());
     }
     /*
      * A recursive helper method that given indexes i,j finds the neighbouring positions
@@ -350,7 +350,7 @@ public class BoggleGame {
      *  - Only human players can call for hints
      */
     public String hint_generator() {
-        System.out.println(gameStats.getWordsNotFound().toString());
+        //System.out.println(gameStats.getWordsNotFound().toString());
 
         index_tracker ++;
 
