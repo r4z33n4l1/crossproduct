@@ -1,5 +1,9 @@
 bulbasaur
 ivysaur
+razeen
+nipun
+carina
+daniel
 venusaur
 charmander
 charmeleon
@@ -664,7 +668,7 @@ spewpa
 vivillon
 litleo
 pyroar
-flabébé
+flabï¿½bï¿½
 floette
 florges
 skiddo

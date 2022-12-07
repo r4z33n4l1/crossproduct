@@ -1,5 +1,8 @@
 package boggle.stats;
 
+import boggle.BoggleGame;
+
+import java.awt.image.BandCombineOp;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -14,16 +17,6 @@ public class BoggleStats {
      * It's a singleton class so, yeah!
      */
     private static BoggleStats instance = null;
-
-    /**
-     * Set of words the player finds in a given round
-     */  
-    private Set<String> playerWords = new HashSet<String>();
-
-    /**
-     * Set of words the computer finds in a given round
-     */  
-    private Set<String> computerWords = new HashSet<String>();
 
     /**
      * Set of words the computer finds in a given round
@@ -163,8 +156,17 @@ public class BoggleStats {
     /**
      * Hint counter
      */
-    public void HintCounter(){
-        hintsCount++;
+    public int GetHintCount(){
+        return this.hintsCount;
+
+    }
+
+    /**
+     * Setter method for number of hints used
+     * Used in helper method for hint_generator in BoggleGame class
+     */
+    public void setHintCount(int hintCount){
+        this.hintsCount = hintCount;
     }
 
     /**
