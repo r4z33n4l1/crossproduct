@@ -131,15 +131,15 @@ public class BoggleStats {
      */
     public String[] endGameStats(boolean isMultiplayer) {
         String[] endStats = {"N/A", "N/A", "N/A", "N/A", "N/A", "N/A"};
-        endStats[0] = "Player 1's score is " + player1Score;
-        endStats[1] = "Player 2's score is " + player2Score;
-        endStats[2] = "Player 1 found " + player1Words.size() + " words in the game";
-        endStats[3] = "Player 2 found " + endStats[3] + " words in the game";
-        endStats[4] = missing_words.size() + " words not found by the players";
+        endStats[0] = "Player 1's score: " + player1Score;
+        endStats[1] = "Player 2's score: " + player2Score;
+        endStats[2] = "Player 1's word(s) found: " + player1Words.size();
+        endStats[3] = "Player 2's word(s) found: " + endStats[3];
+        endStats[4] = missing_words.size() + " word(s) not found by the player(s)";
         endStats[5] = hintsCount + " hints used in the game";
         if (isMultiplayer) {
-            endStats[1] = "Player 2's score is " + player2Score;
-            endStats[3] = "Player 2 found " + player2Words.size() + " words in the game";
+            endStats[1] = "Player 2's score: " + player2Score;
+            endStats[3] = "Player 2's word(s) found: " + player2Words.size();
         }
         return endStats;
     }
@@ -188,8 +188,8 @@ public class BoggleStats {
     }
 
     /**
-    * @return int The current player's score
-    */
+     * @return int The current player's score
+     */
     public int getScore(Player player) {
         if (player == Player.Player1) {
             return player1Score;

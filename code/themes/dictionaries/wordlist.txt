@@ -11654,7 +11654,7 @@ crores
 crosier
 crosiers
 cross
-cross-bun
+crossbun
 crossbar
 crossbars
 crossbones

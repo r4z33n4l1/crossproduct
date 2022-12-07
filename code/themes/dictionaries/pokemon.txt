@@ -249,7 +249,7 @@ larvitar
 pupitar
 tyranitar
 lugia
-ho-oh
+hooh
 celebi
 treecko
 grovyle
@@ -473,7 +473,7 @@ leafeon
 glaceon
 gliscor
 mamoswine
-porygon-z
+porygonz
 gallade
 probopass
 dusknoir
@@ -781,9 +781,9 @@ mimikyu
 bruxish
 drampa
 dhelmise
-jangmo-o
-hakamo-o
-kommo-o
+jangmoo
+hakamoo
+kommoo
 tapu koko
 tapu lele
 tapu bulu
